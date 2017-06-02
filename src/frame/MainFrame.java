@@ -7,6 +7,9 @@ public class MainFrame {
 
 		//add comments test github
 
+		test;
+		updated();
+
 	}
 
 }
