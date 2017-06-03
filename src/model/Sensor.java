@@ -21,6 +21,7 @@ public class Sensor
 	}
 	
 }
+/*
 class FireSensor extends Sensor
 {
  	public FireSensor(String ID)
@@ -38,3 +39,4 @@ class IntruderSensor extends Sensor
 		//sensorType = type;
 	}
 }
+*/
