@@ -3,15 +3,14 @@ package model;
 public class Sensor 
 {
 	private String sensorID;
-	private String sensorGroup; 
+	//sensor itselg doesn't need t oknow its group info
 	private String sensorType;
 
 	private boolean automation;
 
-	public Sensor(String ID, String group)
+	public Sensor(String ID)
 	{
 		sensorID = ID ;
-		sensorGroup = group;
 
 		this.automation = false;
 
@@ -20,16 +19,22 @@ public class Sensor
 	{
 		return sensorID;
 	}
-	String getSensorGroup()
-	{
-		return sensorGroup;
-	}
+	
 }
 class FireSensor extends Sensor
 {
- 	super(Sensor);
+ 	public FireSensor(String ID)
+ 	{
+ 		super(ID);
+ 		//sensorType = type;
+ 	}
+
 }
 class IntruderSensor extends Sensor
 {
-	super(Sensor);
+	public IntruderSensor(String ID)
+	{
+		super(ID);
+		//sensorType = type;
+	}
 }
