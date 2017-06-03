@@ -25,6 +25,7 @@ public class Sensor
 		return sensorGroup;
 	}
 }
+/*
 class FireSensor extends Sensor
 {
  	super(Sensor);
@@ -33,3 +34,4 @@ class IntruderSensor extends Sensor
 {
 	super(Sensor);
 }
+*/
