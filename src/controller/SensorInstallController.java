@@ -12,9 +12,11 @@ import java.util.*;
 public class SensorInstallController extends JPanel
 {
 	private SensorBank sensorbank;
+	private PassWordData passworddata;
 
 	private JComboBox groupCombo, positionCombo, sensorCombo;
 	private JLabel groupLabel, positionLabel,sensorLabel;
+	private PasswordController passwordController = new PasswordController(passworddata);
 
 	
 	public SensorInstallController(SensorBank controlledSensorBank)
@@ -44,6 +46,7 @@ public class SensorInstallController extends JPanel
 		add(positionLabel);
 		add(cbx2);
 		add(installButton);
+		add(passwordController);
 		
 		installButton.addActionListener(new ActionListener()
 		{

@@ -14,11 +14,17 @@ public class SensorMapView extends JPanel implements Observer {
 	private JPanel south = new JPanel();
 	private JPanel east = new JPanel();
 	private JPanel west = new JPanel();
+	
+	//section array was used in drawSensor()
 	private JPanel[] section={north,south,east,west};
+	
+	// SensorGroup is the Enum class
 	private SensorGroup sensorGroup;
 	private SensorGroup[] sg = sensorGroup.values();
 	private SensorBank sensorBank;
 	private static int SENSORMAXNUMBER = 3;
+	
+	
 	protected HashMap<SensorGroup,SingleSensorVIew[]> sensorView;
 	
 	public SensorMapView(SensorBank observeSensorBank){
@@ -48,7 +54,7 @@ public class SensorMapView extends JPanel implements Observer {
 		//extract sensorBank from Obersevable sensorBank
 		sensorBank = (SensorBank)o;
 		drawSensor(sensorBank);
-		revalidate();
+		updateUI();
 	}
 	
 	
@@ -61,17 +67,18 @@ public class SensorMapView extends JPanel implements Observer {
 		// draw all installed sensor
 		for(int i=0;i<sg.length;i++){
 	    	locationSensor = sensorBank.getGroup(sg[i]);
-			
+			SingleSensorVIew[] sensorViewArray= new SingleSensorVIew[3];
 			for(int j=0;j<SENSORMAXNUMBER;j++){
 				if(sensorbank.checkInstalledOrNot(sg[i], j)){
 					int id = locationSensor[j].getSensorID();
 					int xy[] = getSensorXY(j);
 					String filename[]= locationSensor[j].getIcon();
 					SingleSensorVIew sv = new SingleSensorVIew(Integer.toString(id),"sensor",sg[i],xy[0],xy[1],filename);
+					sensorViewArray[j]= sv;
 					section[i].setLayout(null);
 					section[i].add(sv);
-					section[i].revalidate();
 				}
+				//sensorView.put(sg[i],sensorViewArray);
 			}	
 		}
 	}

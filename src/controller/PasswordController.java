@@ -49,18 +49,5 @@ public class PasswordController extends JPanel
 			}
 		});
 	}
-	public static void main(String args[])
-	{
-		PassWordData pw = new PassWordData ();
-		PasswordController pwc = new PasswordController(pw);
-
-		JFrame f = new JFrame();
-		f.getContentPane().setLayout( new FlowLayout());
-		f.getContentPane().add(pwc);
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
 
 }
