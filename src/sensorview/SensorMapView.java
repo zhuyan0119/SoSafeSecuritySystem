@@ -1,5 +1,6 @@
 package sensorview;
 
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.*;
 import javax.swing.*;
@@ -21,17 +22,12 @@ public class SensorMapView extends JPanel implements Observer {
 	protected HashMap<SensorGroup,SingleSensorVIew[]> sensorView;
 	
 	public SensorMapView(SensorBank observeSensorBank){
+		sensorBank = observeSensorBank;
 		setBorder(new TitledBorder("Building Map"));
 		setLayout(new GridLayout(2,2));
 		showBuildingMap();
-		sensorBank = observeSensorBank;
-		//observeSensorBank.addObserver(this);
-		south.setLayout(null);
-		//SingleIntrusionSensorView intrusionSensor= new SingleIntrusionSensorView("North1","motion","North",50,10);
-		//south.add(intrusionSensor);
-		//drawSensor(observeSensorBank);
-		drawSensor(observeSensorBank);
-		
+		observeSensorBank.addObserver(this);
+
 	}
 	
 	//build the buildingMap which includes fours areas of east, south,north and west
@@ -52,20 +48,21 @@ public class SensorMapView extends JPanel implements Observer {
 		//extract sensorBank from Obersevable sensorBank
 		sensorBank = (SensorBank)o;
 		drawSensor(sensorBank);
-		
-		
+		revalidate();
 	}
 	
+	
 	public void drawSensor(SensorBank sensorbank){
-		// define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
-		// and only one sensor, either firesensor or intrudersensor installed at on location 
+		System.out.println("in draw");
+		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
+		 and only one sensor, either firesensor or intrudersensor installed at on location */
 		Sensor[] locationSensor = new Sensor[3];
 				
 		// draw all installed sensor
 		for(int i=0;i<sg.length;i++){
 	    	locationSensor = sensorBank.getGroup(sg[i]);
 			
-			for(int j=0;j<3;j++){
+			for(int j=0;j<SENSORMAXNUMBER;j++){
 				if(sensorbank.checkInstalledOrNot(sg[i], j)){
 					int id = locationSensor[j].getSensorID();
 					int xy[] = getSensorXY(j);
@@ -73,9 +70,9 @@ public class SensorMapView extends JPanel implements Observer {
 					SingleSensorVIew sv = new SingleSensorVIew(Integer.toString(id),"sensor",sg[i],xy[0],xy[1],filename);
 					section[i].setLayout(null);
 					section[i].add(sv);
+					section[i].revalidate();
 				}
-			}
-			
+			}	
 		}
 	}
 		

@@ -1,10 +1,9 @@
 package view;
 
 import java.awt.GridLayout;
-
 import javax.swing.*;
-
-import controller.Instrallation;
+import controller.*;
+import controller.SensorInstallController;
 import model.SensorBank;
 import sensorview.*;
 
@@ -14,12 +13,11 @@ public class InstallationView extends JPanel {
 	//private SingleFireSensorView fireSensor = new SingleFireSensorView("North1","fire","North",50,70);
 	private SensorBank sensorBank;
 	private SensorMapView sensorMapView;
-	private Instrallation installation = new Instrallation();
+	private SensorInstallController installation;
    // constructor
 	public InstallationView(SensorBank sensorBank){
-		//add(intrusionSensor);
-		//add(fireSensor);
 		sensorMapView = new SensorMapView(sensorBank);
+		installation = new SensorInstallController(sensorBank);
 		setLayout(new GridLayout(1,2));
 		add(sensorMapView);
 		add(installation);

@@ -149,21 +149,6 @@ public class SensorInstallController extends JPanel
 		}
 
 	}
-	
-	public static void main(String args[])
-	{
-		SensorBank sb = new SensorBank();
-		SensorInstallController sic = new SensorInstallController(sb);
 
-		JFrame f = new JFrame();
-		f.getContentPane().setLayout( new GridLayout( 1, 4 ) );
-		f.getContentPane().add(sic);
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-	}
-	
 }
 

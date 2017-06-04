@@ -30,9 +30,12 @@ public class SensorBank extends Observable{
 	
 	public void insertSensor(Sensor sensor, SensorGroup sensorGroup, int position)
 	{
+		System.out.println("add sensor");
 		Sensor[] sensorArray = groupSensorMap.get(sensorGroup);
 		sensorArray[position] = sensor;
-		//idSensorMap.put(sensor.getSensorID(),sensor);
+		setChanged();
+	    // notify Observers that model has changed
+	    notifyObservers();	
 	}
 	
 	public boolean checkInstalledOrNot(SensorGroup group, int position){

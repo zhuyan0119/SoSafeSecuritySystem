@@ -9,7 +9,7 @@ public class MainFrame extends JFrame {
 	private SensorBank sensorBank;
 	
 	// contains controller
-	Instrallation installation;
+	//Instrallation installation;
 	PasswordController passwordController;
 	
 	//contains frame and TabbedPanel
