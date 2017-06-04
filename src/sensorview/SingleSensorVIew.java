@@ -1,6 +1,9 @@
 package sensorview;
 
 import javax.swing.*;
+
+import model.SensorGroup;
+
 import java.awt.Image;
 
 public class SingleSensorVIew extends JLabel {
@@ -19,17 +22,17 @@ public class SingleSensorVIew extends JLabel {
 	
 		
 	private String sensorId;
-	private String sensorGroup;
+	private SensorGroup sensorGroup;
 		
-	public SingleSensorVIew (String sensorId, String text, String group, int locationX, int locationY, String filename1,String filename2,String filename3){
+	public SingleSensorVIew (String sensorId, String text, SensorGroup group, int locationX, int locationY, String[] filename){
 		super();
 		// import Icons and set size
-		sensorOff = getResizeImageIcon(filename1, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorOn = getResizeImageIcon(filename2, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorAlert = getResizeImageIcon(filename3, LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorOff = getResizeImageIcon(filename[0], LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorOn = getResizeImageIcon(filename[1], LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorAlert = getResizeImageIcon(filename[2], LABEL_HEIGHT-25, LABEL_WIDTH-25);
 		
 		//setting of the icon
-		this.setText(text);
+		//this.setText(text);
 		this.setIcon(sensorOff);
 		this.setSize(LABEL_HEIGHT, LABEL_WIDTH);
 		this.setLocation(locationX, locationY);
@@ -60,7 +63,7 @@ public class SingleSensorVIew extends JLabel {
 		setIcon(sensorAlert);
 	}
 		
-	public String getSprinklerGroup() {
+	public SensorGroup getsensorGroup() {
 		return sensorGroup;
 	}
 		

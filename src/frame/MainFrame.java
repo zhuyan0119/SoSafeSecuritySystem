@@ -17,9 +17,9 @@ public class MainFrame extends JFrame {
 	PanelTab panelTab;
 	
 	//constructor to initiate frame and panelTab
-	public MainFrame(){
+	public MainFrame(SensorBank sensorBank){
 		super ("So Safe System");
-		panelTab = new PanelTab();
+		panelTab = new PanelTab(sensorBank);
 		
 		add(panelTab);
 		setSize(900,500);
@@ -27,7 +27,8 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		MainFrame frame = new MainFrame();
+		SensorBank sensorbank = new SensorBank();
+		MainFrame frame = new MainFrame(sensorbank);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
