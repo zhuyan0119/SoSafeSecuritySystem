@@ -1,9 +1,9 @@
 package model;
 
 public class FireSensor extends Sensor{
-	public FireSensor(String ID)
+	public FireSensor()
  	{
- 		super(ID);
+ 		super();
  		//sensorType = type;
  	}
 	
@@ -12,5 +12,6 @@ public class FireSensor extends Sensor{
 		String[] fireIcon={"fire Off.jpeg","fire On.png","fire alert.png"};
 		return fireIcon;
 	}
+
 
 }

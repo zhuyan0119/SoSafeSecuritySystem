@@ -2,22 +2,29 @@ package model;
 
 public abstract class Sensor 
 {
-	private String sensorID;
-	//sensor itselg doesn't need t oknow its group info
-	private String sensorType;
+	
+	private static int nextID = 0;
 
+	private int  sensorID;
+	private String sensorType;
 	private boolean automation;
 
-	public Sensor(String ID)
+
+	public Sensor()
 	{
-		sensorID = ID ;
+		sensorID = nextID;
+		nextID ++;
 
 		this.automation = false;
 
 	}
-	public String getSensorID()
-	{
+
+	public int getSensorID(){
 		return sensorID;
+	}
+	public String getSensorType()
+	{
+		return sensorType;
 	}
 	
 	abstract public String[] getIcon();
