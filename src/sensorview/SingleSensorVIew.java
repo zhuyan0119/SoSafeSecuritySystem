@@ -23,10 +23,12 @@ public class SingleSensorVIew extends JLabel {
 		
 	public SingleSensorVIew (String sensorId, String text, String group, int locationX, int locationY, String filename1,String filename2,String filename3){
 		super();
-		 sensorOff = getResizeImageIcon(filename1, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		 sensorOn = getResizeImageIcon(filename2, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		 sensorAlert = getResizeImageIcon(filename3, LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		// import Icons and set size
+		sensorOff = getResizeImageIcon(filename1, LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorOn = getResizeImageIcon(filename2, LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorAlert = getResizeImageIcon(filename3, LABEL_HEIGHT-25, LABEL_WIDTH-25);
 		
+		//setting of the icon
 		this.setText(text);
 		this.setIcon(sensorOff);
 		this.setSize(LABEL_HEIGHT, LABEL_WIDTH);

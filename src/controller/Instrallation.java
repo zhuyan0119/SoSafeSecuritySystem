@@ -1,7 +1,13 @@
 package controller;
 
-public class Instrallation {
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
+public class Instrallation extends JPanel{
 	
-	// this is a test for github
+	public Instrallation(){
+		setBorder(new TitledBorder("Installation"));
+		setLayout(null);
+	}
 
 }

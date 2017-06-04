@@ -21,22 +21,3 @@ public class Sensor
 	}
 	
 }
-/*
-class FireSensor extends Sensor
-{
- 	public FireSensor(String ID)
- 	{
- 		super(ID);
- 		//sensorType = type;
- 	}
-
-}
-class IntruderSensor extends Sensor
-{
-	public IntruderSensor(String ID)
-	{
-		super(ID);
-		//sensorType = type;
-	}
-}
-*/

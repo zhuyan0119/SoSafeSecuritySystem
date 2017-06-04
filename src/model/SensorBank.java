@@ -1,13 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class SensorBank
-{
+
+public class SensorBank extends Observable{
 	private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, List<Sensor>> groupSensorMap = new HashMap<SensorGroup, List<Sensor>>();
 	
@@ -26,7 +22,7 @@ public class SensorBank
 
 	}
 	
-	List<Sensor> getGroup(SensorGroup group)
+	public List<Sensor> getGroup(SensorGroup group)
 	{
 		return groupSensorMap.get(group);
 	}
@@ -35,6 +31,8 @@ public class SensorBank
 		groupSensorMap.get(sensorGroup).add(sensor);
 		idSensorMap.put(sensor.getSensorID(),sensor);
 	}
+	
+	/*
 	public static void main(String args[])
 	{
 		Sensor testSensor = new Sensor("T1");
@@ -43,6 +41,7 @@ public class SensorBank
 
 		System.out.println(bank.getGroup(SensorGroup.NORTH));
 	}
+	*/
 		
 
 

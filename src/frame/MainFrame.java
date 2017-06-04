@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 		panelTab = new PanelTab();
 		
 		add(panelTab);
-		setSize(900,600);
+		setSize(900,500);
 		
 	}
 
