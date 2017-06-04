@@ -50,17 +50,21 @@ public class SensorInstallController extends JPanel
 			public void actionPerformed(ActionEvent event)
 			{
 			
-				if (sensorLabel.getText() == "FireSensor")
+				boolean sensorExist = sensorbank.checkInstalledOrNot(SensorGroup.valueOf(groupLabel.getText()),convertPosition(positionLabel.getText()));
+				if (!sensorExist)
 				{
-					Sensor sensor = new FireSensor();
-					sensorbank.insertSensor(sensor,SensorGroup.valueOf(groupLabel.getText()),convertPosition(positionLabel.getText()));
-				}
-				if (sensorLabel.getText() =="IntruderSensor")
-				{
-					Sensor sensor = new IntruderSensor();
-					sensorbank.insertSensor(sensor,SensorGroup.valueOf(groupLabel.getText()),convertPosition(positionLabel.getText()));
+					if (sensorLabel.getText() == "FireSensor")
+					{
+						Sensor sensor = new FireSensor();
+						sensorbank.insertSensor(sensor,SensorGroup.valueOf(groupLabel.getText()),convertPosition(positionLabel.getText()));
+					}
+					if (sensorLabel.getText() =="IntruderSensor")
+					{
+						Sensor sensor = new IntruderSensor();
+						sensorbank.insertSensor(sensor,SensorGroup.valueOf(groupLabel.getText()),convertPosition(positionLabel.getText()));
 
-				}				
+					}		
+				}			
 			}
 		});
 
