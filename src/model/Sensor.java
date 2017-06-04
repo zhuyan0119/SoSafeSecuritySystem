@@ -1,6 +1,6 @@
 package model;
 
-public class Sensor 
+public abstract class Sensor 
 {
 	
 	private static int nextID = 0;
@@ -18,13 +18,15 @@ public class Sensor
 		this.automation = false;
 
 	}
-	int getSensorID()
-	{
+
+	public int getSensorID(){
 		return sensorID;
 	}
-	String getSensorType()
+	public String getSensorType()
 	{
 		return sensorType;
 	}
+	
+	abstract public String[] getIcon();
 	
 }

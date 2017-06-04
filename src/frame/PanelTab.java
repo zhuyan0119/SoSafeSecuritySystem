@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import model.SensorBank;
 import view.*;
 
 public class PanelTab extends JTabbedPane {
@@ -11,11 +12,11 @@ public class PanelTab extends JTabbedPane {
 	private InstallationView installationView ;
 	private ConfigureView configureView;
 	private BillView billView;
-	
+	private SensorBank sensorbank;
 	// PanelTab constructor to initialize three views with  data membranes of sensormap, schedule and bill 
 	
-	public PanelTab() {
-		installationView = new InstallationView();
+	public PanelTab(SensorBank sensorbank) {
+		installationView = new InstallationView(sensorbank);
 		configureView = new ConfigureView();
 		billView = new BillView();
 		
