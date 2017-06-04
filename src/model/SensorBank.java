@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class SensorBank extends Observable{
-	private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
+	//private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
 	
 	public SensorBank()
@@ -22,30 +22,31 @@ public class SensorBank extends Observable{
 
 	}
 	
-	Sensor[] getGroup(SensorGroup group)
+	public Sensor[] getGroup(SensorGroup group)
 	{
 		return groupSensorMap.get(group);
 	}
-	void insertSensor(Sensor sensor, SensorGroup sensorGroup, int position)
+	public void insertSensor(Sensor sensor, SensorGroup sensorGroup, int position)
 	{
 		Sensor[] sensorArray = groupSensorMap.get(sensorGroup);
 		sensorArray[position] = sensor;
-		idSensorMap.put(sensor.getSensorID(),sensor);
+		//idSensorMap.put(sensor.getSensorID(),sensor);
 	}
-	boolean checkInstalledOrNot(SensorGroup group, int position)
+	public boolean checkInstalledOrNot(SensorGroup group, int position)
 	{
 		Sensor[] sensorArray = groupSensorMap.get(group);
 		return sensorArray[position] != null;
 	}
 
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
-		Sensor testSensor = new Sensor("T1");
+		Sensor testSensor = new Sensor();
 		SensorBank bank = new SensorBank();
 		bank.insertSensor(testSensor, SensorGroup.NORTH, 1);
 
 		System.out.println(bank.getGroup(SensorGroup.NORTH));
 	}
+	*/
 
 	
 }
