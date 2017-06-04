@@ -1,6 +1,6 @@
 package model;
 
-public class Sensor 
+public abstract class Sensor 
 {
 	private String sensorID;
 	//sensor itselg doesn't need t oknow its group info
@@ -15,9 +15,11 @@ public class Sensor
 		this.automation = false;
 
 	}
-	String getSensorID()
+	public String getSensorID()
 	{
 		return sensorID;
 	}
+	
+	abstract public String[] getIcon();
 	
 }
