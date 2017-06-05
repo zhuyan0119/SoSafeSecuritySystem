@@ -7,6 +7,7 @@ public class SensorBank extends Observable{
 
 	//private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
+	private PassWordData pw;
 	
 	public SensorBank()
 	{
@@ -19,6 +20,7 @@ public class SensorBank extends Observable{
 		groupSensorMap.put(SensorGroup.SOUTH, southGroup);
 		groupSensorMap.put(SensorGroup.EAST, eastGroup);
 		groupSensorMap.put(SensorGroup.WEST, westGroup);
+		pw = new PassWordData();
 	
 
 	}
@@ -41,6 +43,10 @@ public class SensorBank extends Observable{
 	public boolean checkInstalledOrNot(SensorGroup group, int position){
 		Sensor[] sensorArray = groupSensorMap.get(group);
 		return sensorArray[position] != null;
+	}
+	
+	public PassWordData getPassWordData(){
+		return pw;
 	}
 	
 

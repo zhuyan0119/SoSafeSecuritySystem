@@ -11,15 +11,15 @@ import java.util.*;
 public class PasswordController extends JPanel 
 {
 	private PassWordData passWord;
-
 	private JTextField passWordTextField;
 	private JLabel passWordLabel;
 	private JButton passWordButton;
+	 
 
-	public PasswordController(PassWordData controlledPw)
+	public PasswordController(SensorBank sensorBank)
 	{
 		super();
-		passWord = controlledPw;
+		passWord = sensorBank.getPassWordData();
 		passWordLabel = new JLabel("Enter Password: ");
 		passWordTextField = new JTextField(20);
 
@@ -39,6 +39,8 @@ public class PasswordController extends JPanel
 				{
 					passWord.checkPwSetOrNot();
 					passWord.setPassWord(passWordLabel.getText());
+					passWordTextField.setText("password setted!" );
+					passWordButton.setVisible(false);
 	
 				}
 				catch(Exception exception)
@@ -46,6 +48,19 @@ public class PasswordController extends JPanel
 					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
 
 				}
+				
+				
+				/*
+				if(!passWord.checkPwSetOrNot()){
+					passWord.setPassWord(passWordLabel.getText());
+					
+				}
+				else{
+					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
+				}
+				*/
+				
+				
 			}
 		});
 	}
