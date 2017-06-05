@@ -17,12 +17,14 @@ public class PanelTab extends JTabbedPane {
 	
 	public PanelTab(SensorBank sensorbank) {
 		installationView = new InstallationView(sensorbank);
-		configureView = new ConfigureView();
+		configureView = new ConfigureView(sensorbank);
 		billView = new BillView();
 		
 		addTab("Installation", installationView);
 		addTab("Configure", configureView);
 		addTab("Bill", billView);
+
+
 		
 		//Thread waterShowing = new Thread(waterUseView);
 		//waterShowing.start();
