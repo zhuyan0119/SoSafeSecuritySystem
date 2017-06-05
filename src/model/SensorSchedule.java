@@ -12,6 +12,7 @@ public class SensorSchedule
 
 	public SensorSchedule()
 	{
+		// ArrayList store the multiple TimeRanges, like 1:00-2:00 then 5:00 to 7:00
 		ArrayList<TimeRange> northSchedule = new ArrayList<TimeRange>();
 		ArrayList<TimeRange> southSchedule = new ArrayList<TimeRange>();
 		ArrayList<TimeRange> eastSchedule = new ArrayList<TimeRange>();

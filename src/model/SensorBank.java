@@ -48,6 +48,11 @@ public class SensorBank extends Observable{
 	public PassWordData getPassWordData(){
 		return pw;
 	}
+
+	public Boolean getAutomation(SensorGroup sg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	

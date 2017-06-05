@@ -4,12 +4,13 @@ import java.util.*;
 
 public class TimeRange
 {
-	SensorTime startTime;
-	SensorTime endTime;
+	public SensorTime startTime;
+	public SensorTime endTime;
 
 	public TimeRange(SensorTime startTime, SensorTime endTime)
 	{
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
+	
 }
