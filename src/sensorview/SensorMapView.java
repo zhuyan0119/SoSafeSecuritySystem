@@ -24,11 +24,11 @@ public class SensorMapView extends JPanel implements Observer {
 	private SensorBank sensorBank;
 	private static int SENSORMAXNUMBER = 3;
 	
-	
 	protected HashMap<SensorGroup,SingleSensorVIew[]> sensorView;
 	
 	public SensorMapView(SensorBank observeSensorBank){
 		sensorBank = observeSensorBank;
+		sensorView = new HashMap<SensorGroup,SingleSensorVIew[]>();
 		setBorder(new TitledBorder("Building Map"));
 		setLayout(new GridLayout(2,2));
 		showBuildingMap();
@@ -78,7 +78,7 @@ public class SensorMapView extends JPanel implements Observer {
 					section[i].setLayout(null);
 					section[i].add(sv);
 				}
-				//sensorView.put(sg[i],sensorViewArray);
+				sensorView.put(sg[i],sensorViewArray);
 			}	
 		}
 	}

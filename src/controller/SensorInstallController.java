@@ -16,13 +16,14 @@ public class SensorInstallController extends JPanel
 
 	private JComboBox groupCombo, positionCombo, sensorCombo;
 	private JLabel groupLabel, positionLabel,sensorLabel;
-	private PasswordController passwordController = new PasswordController(passworddata);
+	private PasswordController passwordController;
 
 	
 	public SensorInstallController(SensorBank controlledSensorBank)
 	{
 		
 		super();
+		passwordController = new PasswordController(controlledSensorBank);
 		sensorbank = controlledSensorBank;
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
