@@ -30,8 +30,13 @@ public class SensorSchedule
 	}
 	public void insertTimeRange(SensorGroup group, SensorTime startTime, SensorTime endTime)
 	{
+		System.out.println(groupScheduleMap.get(SensorGroup.NORTH));
 		ArrayList<TimeRange> timeArray = groupScheduleMap.get(group);
 		timeArray.add(new TimeRange(startTime, endTime));
+		System.out.println(groupScheduleMap.get(SensorGroup.NORTH));
+
+
+
 
 	}
 
