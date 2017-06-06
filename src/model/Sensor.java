@@ -43,22 +43,34 @@ public abstract class Sensor extends Observable
 	// change sensor status to ON
 	public void setSensorOn(){
 		this.status = 1;
+		setChanged();
+	    // notify el has changed
+	    notifyObservers();	
 	}
 	
 	//change sensor status to OFF
 	public void setSensorOff(){
 		this.status = 0;
+		setChanged();
+	    // notify el has changed
+	    notifyObservers();	
 	}
 	
 	// change sensor status to alert
 	public void setOnSensorAlert(){
 		if (this.status==1) //if sensor is on, then it can give alert
 			this.status = -1;
+		setChanged();
+	    // notify el has changed
+	    notifyObservers();	
 	}
 	
 	public void setOffSensorAlert(){
 		if(this.status==-1) // if sensor is on alert, then it can be set off
 			this.status=1;
+		setChanged();
+	    // notify el has changed
+	    notifyObservers();	
 	}
 	
 	public int getstatus(){

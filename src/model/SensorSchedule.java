@@ -18,7 +18,7 @@ public class SensorSchedule
 		ArrayList<TimeRange> eastSchedule = new ArrayList<TimeRange>();
 		ArrayList<TimeRange> westSchedule = new ArrayList<TimeRange>();
 		
-	    TimeRange NorthTR = new TimeRange(new SensorTime(18,58),new SensorTime(18,59));
+	    TimeRange NorthTR = new TimeRange(new SensorTime(22,00),new SensorTime(22,01));
 	    northSchedule.add(NorthTR);
 		groupScheduleMap.put(SensorGroup.NORTH, northSchedule);
 		groupScheduleMap.put(SensorGroup.SOUTH, southSchedule);

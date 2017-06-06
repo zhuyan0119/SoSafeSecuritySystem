@@ -34,6 +34,7 @@ public class MainFrame extends JFrame {
 		SensorBank sensorbank = new SensorBank();
 		SensorSchedule schedule = new SensorSchedule();
 		Scheduler north = new Scheduler(SensorGroup.NORTH,schedule,sensorbank);
+		new Thread(north).start();
 		MainFrame frame = new MainFrame(sensorbank);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
