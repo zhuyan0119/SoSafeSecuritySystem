@@ -69,7 +69,6 @@ public class SingleSensorVIew extends JLabel implements Observer {
 	*/
 	
 	
-	
 	public void setImageIcon(Sensor sensor){
 		
 		int status = sensor.getstatus();
@@ -93,20 +92,13 @@ public class SingleSensorVIew extends JLabel implements Observer {
 		return sensorId;
 	}
 		
-	public void onSensorOff(){
-		setIcon(sensorOff);
-	}
-		
-	public void onSensorOn(){
-		setIcon(sensorOn);
-	}
-	
-	public void onSensorAlert(){
-		setIcon(sensorAlert);
-	}
 		
 	public SensorGroup getsensorGroup() {
 		return sensorGroup;
+	}
+	
+	public Sensor getSensor(){
+		return sensor;
 	}
 		
 	protected ImageIcon getResizeImageIcon(String imagePath, int width, int length) {
