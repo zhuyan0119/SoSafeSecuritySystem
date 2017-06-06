@@ -2,6 +2,7 @@ package sensorview;
 
 import javax.swing.*;
 
+import model.Sensor;
 import model.SensorGroup;
 
 import java.awt.Image;
@@ -14,16 +15,35 @@ public class SingleSensorVIew extends JLabel {
 	
 	private ImageIcon sensorOff;
 	private ImageIcon sensorOn;
-	private ImageIcon sensorAlert;	
+	private ImageIcon sensorAlert;		
+	private int sensorId;
+	private SensorGroup sensorGroup;
+	
+	
+	public SingleSensorVIew(Sensor sensor, SensorGroup group, int locationX, int locationY){
+		super();
+		String filename[]= sensor.getIcon();
+		this.sensorGroup = group;
+		this.sensorId = sensor.getSensorID();
+		
+		// the sensor.getIcon() return the filename in order of senserOff, sensorOn and sensorAlert
+		sensorOff = getResizeImageIcon(filename[0], LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorOn = getResizeImageIcon(filename[1], LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		sensorAlert = getResizeImageIcon(filename[2], LABEL_HEIGHT-25, LABEL_WIDTH-25);
+		
+		// set the properties of this SingleSenorView
+		setImageIcon(sensor);
+		this.setSize(LABEL_HEIGHT, LABEL_WIDTH);
+		this.setLocation(locationX, locationY);
+	}
+	
+	
+	
+	
+	
+	
 	
 	/*
-	
-	*/
-	
-		
-	private String sensorId;
-	private SensorGroup sensorGroup;
-		
 	public SingleSensorVIew (String sensorId, String text, SensorGroup group, int locationX, int locationY, String[] filename){
 		super();
 		// import Icons and set size
@@ -40,14 +60,23 @@ public class SingleSensorVIew extends JLabel {
 		this.sensorId = sensorId;
 		this.sensorGroup = group;
 	}
+	*/
 	
-	public void setImageIcon(String filename1,String filename2,String filename3){
-		sensorOff = getResizeImageIcon(filename1, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorOn = getResizeImageIcon(filename2, LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorAlert = getResizeImageIcon(filename3, LABEL_HEIGHT-25, LABEL_WIDTH-25);
+	
+	
+	public void setImageIcon(Sensor sensor){
+		int status = sensor.getstatus();
+		if(status==1)
+			this.setIcon(sensorOn);
+		else{
+			if(status==-1)
+				this.setIcon(sensorAlert);
+			else
+				this.setIcon(sensorOff);
+		}	
 	}
 	
-	public String getSensorId(){
+	public int getSensorId(){
 		return sensorId;
 	}
 		

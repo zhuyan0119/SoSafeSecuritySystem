@@ -88,7 +88,7 @@ public class SensorConfigureView extends JPanel implements Observer
 	}
 	public void drawSensor(SensorBank sensorbank)
 	{
-		System.out.println("in draw");
+	
 		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
 		 and only one sensor, either firesensor or intrudersensor installed at on location */
 		Sensor[] locationSensor = new Sensor[3];
@@ -102,13 +102,14 @@ public class SensorConfigureView extends JPanel implements Observer
 			{
 				if(sensorbank.checkInstalledOrNot(sg[i], j))
 				{
-					int id = locationSensor[j].getSensorID();
 					int xy[] = getSensorXY(j);
-					String filename[]= locationSensor[j].getIcon();
-					SingleSensorVIew sv = new SingleSensorVIew(Integer.toString(id),"sensor",sg[i],xy[0],xy[1],filename);
+					//String filename[]= locationSensor[j].getIcon();
+					SingleSensorVIew sv = new SingleSensorVIew(locationSensor[j],sg[i],xy[0],xy[1]);
 					sensorViewArray[j]= sv;
 					section[i].setLayout(null);
 					section[i].add(sv);
+					
+					/*
 					if(locationSensor[j].getIsOn()==true)
 					{
 						sv.onSensorOn();
@@ -117,6 +118,8 @@ public class SensorConfigureView extends JPanel implements Observer
 					{
 						sv.onSensorOff();
 					}
+					*/
+					
 				}
 			}
 		}
