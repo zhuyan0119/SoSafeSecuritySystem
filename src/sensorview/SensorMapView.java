@@ -61,7 +61,7 @@ public class SensorMapView extends JPanel implements Observer {
 	public void drawSensor(SensorBank sensorbank){
 		System.out.println("in draw");
 		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
-		 and only one sensor, either firesensor or intrudersensor installed at on location */
+		 and only one sensor, either firesensor or intrudersensor installed at one location */
 		Sensor[] locationSensor = new Sensor[3];
 				
 		// draw all installed sensor
@@ -70,10 +70,8 @@ public class SensorMapView extends JPanel implements Observer {
 			SingleSensorVIew[] sensorViewArray= new SingleSensorVIew[3];
 			for(int j=0;j<SENSORMAXNUMBER;j++){
 				if(sensorbank.checkInstalledOrNot(sg[i], j)){
-					int id = locationSensor[j].getSensorID();
 					int xy[] = getSensorXY(j);
-					String filename[]= locationSensor[j].getIcon();
-					SingleSensorVIew sv = new SingleSensorVIew(Integer.toString(id),"sensor",sg[i],xy[0],xy[1],filename);
+					SingleSensorVIew sv = new SingleSensorVIew(locationSensor[j],sg[i],xy[0],xy[1]);
 					sensorViewArray[j]= sv;
 					section[i].setLayout(null);
 					section[i].add(sv);
@@ -85,17 +83,19 @@ public class SensorMapView extends JPanel implements Observer {
 		
 	public int[] getSensorXY(int i){
 		int[] xy = {0,0};
+		// location 1
 		if(i==0){
 			xy[0]=30;
 			xy[1]=30;
 			return xy;
 		}
-			
+		//location 2	
 		else if(i==1){
 			xy[0]=150;
 			xy[1]=50;
 			return xy;
 		}
+		//location 3
 		else if(i==2){
 			xy[0]=90;
 			xy[1]=130;

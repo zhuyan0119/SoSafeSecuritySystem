@@ -17,6 +17,9 @@ public class SensorSchedule
 		ArrayList<TimeRange> southSchedule = new ArrayList<TimeRange>();
 		ArrayList<TimeRange> eastSchedule = new ArrayList<TimeRange>();
 		ArrayList<TimeRange> westSchedule = new ArrayList<TimeRange>();
+		
+	    TimeRange NorthTR = new TimeRange(new SensorTime(22,00),new SensorTime(22,01));
+	    northSchedule.add(NorthTR);
 		groupScheduleMap.put(SensorGroup.NORTH, northSchedule);
 		groupScheduleMap.put(SensorGroup.SOUTH, southSchedule);
 		groupScheduleMap.put(SensorGroup.EAST, eastSchedule);
@@ -30,8 +33,13 @@ public class SensorSchedule
 	}
 	public void insertTimeRange(SensorGroup group, SensorTime startTime, SensorTime endTime)
 	{
+		System.out.println(groupScheduleMap.get(SensorGroup.NORTH));
 		ArrayList<TimeRange> timeArray = groupScheduleMap.get(group);
 		timeArray.add(new TimeRange(startTime, endTime));
+		System.out.println(groupScheduleMap.get(SensorGroup.NORTH));
+
+
+
 
 	}
 

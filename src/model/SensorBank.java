@@ -8,10 +8,11 @@ public class SensorBank extends Observable{
 	//private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
 	private PassWordData pw;
+	private Boolean automation;
 	
 	public SensorBank()
 	{
-		
+		System.out.println("construct sensor bank");
 		Sensor[] northGroup = new Sensor[3];
 		Sensor[] southGroup = new Sensor[3];
  		Sensor[] eastGroup = new Sensor[3];
@@ -21,6 +22,7 @@ public class SensorBank extends Observable{
 		groupSensorMap.put(SensorGroup.EAST, eastGroup);
 		groupSensorMap.put(SensorGroup.WEST, westGroup);
 		pw = new PassWordData();
+		automation = true;
 	
 
 	}
@@ -41,6 +43,7 @@ public class SensorBank extends Observable{
 	}
 	
 	public boolean checkInstalledOrNot(SensorGroup group, int position){
+		
 		Sensor[] sensorArray = groupSensorMap.get(group);
 		return sensorArray[position] != null;
 	}
@@ -49,11 +52,17 @@ public class SensorBank extends Observable{
 		return pw;
 	}
 
-	public Boolean getAutomation(SensorGroup sg) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean getAutomation() {
+		return automation;
 	}
 	
+	public void turnOngroupSensor(){
+		
+	}
+	
+	public void turnOffgorupSensor(){
+		
+	}
 
 	
 }
