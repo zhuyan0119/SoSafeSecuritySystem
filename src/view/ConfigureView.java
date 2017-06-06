@@ -5,23 +5,27 @@ import java.awt.GridLayout;
 import controller.*;
 import controller.SensorInstallController;
 import model.SensorBank;
+import model.SensorSchedule;
 import sensorview.*;
 
 
 public class ConfigureView extends JPanel 
 {
-	private SensorBank sensorBank;
+	//private SensorBank sensorBank;
+	//private SensorSchedule sensorSchedule;
 	private SensorConfigureView sensorConfigureView;
-	//private SensorInstallController installation;
+	private SensorConfigureController configureController;
 	
 	// constructor
-	public ConfigureView(SensorBank sensorBank)
+	public ConfigureView(SensorBank sensorBank,SensorSchedule sensorSchedule)
 	{
+		
 		sensorConfigureView = new SensorConfigureView(sensorBank);
-		//installation = new SensorInstallController(sensorBank);
+		configureController = new SensorConfigureController(sensorBank,sensorSchedule);
 		add(sensorConfigureView);
-		//add(installation);
+		add(configureController);
 		setLayout(new GridLayout(1,2));
+		
 
 	}
 

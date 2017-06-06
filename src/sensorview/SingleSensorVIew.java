@@ -6,8 +6,10 @@ import model.Sensor;
 import model.SensorGroup;
 
 import java.awt.Image;
+import java.util.Observable;
+import java.util.Observer;
 
-public class SingleSensorVIew extends JLabel {
+public class SingleSensorVIew extends JLabel implements Observer {
 	protected static final int LABEL_WIDTH = 65;
 	protected static final int LABEL_HEIGHT = 65;
 	
@@ -18,6 +20,7 @@ public class SingleSensorVIew extends JLabel {
 	private ImageIcon sensorAlert;		
 	private int sensorId;
 	private SensorGroup sensorGroup;
+	private Sensor sensor;
 	
 	
 	public SingleSensorVIew(Sensor sensor, SensorGroup group, int locationX, int locationY){
@@ -25,6 +28,7 @@ public class SingleSensorVIew extends JLabel {
 		String filename[]= sensor.getIcon();
 		this.sensorGroup = group;
 		this.sensorId = sensor.getSensorID();
+		this.sensor = sensor;
 		
 		// the sensor.getIcon() return the filename in order of senserOff, sensorOn and sensorAlert
 		sensorOff = getResizeImageIcon(filename[0], LABEL_HEIGHT-25, LABEL_WIDTH-25);
@@ -35,6 +39,8 @@ public class SingleSensorVIew extends JLabel {
 		setImageIcon(sensor);
 		this.setSize(LABEL_HEIGHT, LABEL_WIDTH);
 		this.setLocation(locationX, locationY);
+		
+		sensor.addObserver(this);
 	}
 	
 	
@@ -63,37 +69,36 @@ public class SingleSensorVIew extends JLabel {
 	*/
 	
 	
-	
 	public void setImageIcon(Sensor sensor){
+		
 		int status = sensor.getstatus();
-		if(status==1)
+		
+		if(status==1){
 			this.setIcon(sensorOn);
-		else{
-			if(status==-1)
-				this.setIcon(sensorAlert);
-			else
-				this.setIcon(sensorOff);
-		}	
+			System.out.println("setImageIcon: sensorOn"+" "+status);
+		}
+		if(status==-1){
+			this.setIcon(sensorAlert);
+			
+		}
+			
+		if(status==0){
+			System.out.println("setImageIcon: sensorOff"+status);
+			this.setIcon(sensorOff );
+		}
 	}
 	
 	public int getSensorId(){
 		return sensorId;
 	}
 		
-	public void onSensorOff(){
-		setIcon(sensorOff);
-	}
-		
-	public void onSensorOn(){
-		setIcon(sensorOn);
-	}
-	
-	public void onSensorAlert(){
-		setIcon(sensorAlert);
-	}
 		
 	public SensorGroup getsensorGroup() {
 		return sensorGroup;
+	}
+	
+	public Sensor getSensor(){
+		return sensor;
 	}
 		
 	protected ImageIcon getResizeImageIcon(String imagePath, int width, int length) {
@@ -102,6 +107,13 @@ public class SingleSensorVIew extends JLabel {
 		Image resizedImage = oriImage.getScaledInstance(length, width, Image.SCALE_SMOOTH);
 		ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
 		return resizedImageIcon;
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setImageIcon(sensor);
+		updateUI();
 	}
 
 

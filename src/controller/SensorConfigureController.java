@@ -89,20 +89,6 @@ public class SensorConfigureController extends JPanel
       	});
       	return groupCombo;
 	}
-	public static void main(String args[])	
-	{
-		SensorBank sb = new SensorBank();
-		SensorSchedule  ss = new SensorSchedule();
-
-		SensorConfigureController scc = new SensorConfigureController(sb,ss);
-		JFrame f = new JFrame();
-		f.getContentPane().add(scc);
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-
 
 }
 
