@@ -59,9 +59,9 @@ public class SensorMapView extends JPanel implements Observer {
 	
 	
 	public void drawSensor(SensorBank sensorbank){
-		System.out.println("in draw");
 		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
 		 and only one sensor, either firesensor or intrudersensor installed at one location */
+		System.out.println("in sensorMapView Draw function");
 		Sensor[] locationSensor = new Sensor[3];
 				
 		// draw all installed sensor
@@ -76,7 +76,7 @@ public class SensorMapView extends JPanel implements Observer {
 					section[i].setLayout(null);
 					section[i].add(sv);
 				}
-				sensorView.put(sg[i],sensorViewArray);
+				//sensorView.put(sg[i],sensorViewArray);
 			}	
 		}
 	}

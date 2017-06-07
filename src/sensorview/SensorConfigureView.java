@@ -2,13 +2,15 @@ package sensorview;
 
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import model.*;
 
-public class SensorConfigureView extends JPanel implements Observer 
-{
+public class SensorConfigureView extends JPanel implements Observer {
+
 	// use 3 panels to represent the layout of building 
 	private JPanel north = new JPanel();
 	private JPanel south = new JPanel();
@@ -24,8 +26,7 @@ public class SensorConfigureView extends JPanel implements Observer
 	private SensorBank sensorBank;
 	private static int SENSORMAXNUMBER = 3;
 	
-	
-	protected HashMap<SensorGroup,SingleSensorVIew[]> sensorView;
+	protected HashMap<SensorGroup,SingleSensorVIew[]> sensorView = new HashMap<SensorGroup,SingleSensorVIew[]>();
 	
 	public SensorConfigureView(SensorBank observeSensorBank)
 	{
@@ -48,7 +49,7 @@ public class SensorConfigureView extends JPanel implements Observer
 			}
 		}
 		observeSensorBank.addObserver(this);
-
+		
 		
 	}
 	public void showBuildingMap()
@@ -105,25 +106,26 @@ public class SensorConfigureView extends JPanel implements Observer
 					int xy[] = getSensorXY(j);
 					//String filename[]= locationSensor[j].getIcon();
 					SingleSensorVIew sv = new SingleSensorVIew(locationSensor[j],sg[i],xy[0],xy[1]);
+					
 					sensorViewArray[j]= sv;
 					section[i].setLayout(null);
 					section[i].add(sv);
 					
-					/*
-					if(locationSensor[j].getIsOn()==true)
-					{
-						sv.onSensorOn();
-					}
-					else
-					{
-						sv.onSensorOff();
-					}
-					*/
-					
 				}
 			}
+			sensorView.put(sg[i], sensorViewArray);
+			
 		}
 	}
+	
+	public void addMouseListener(MouseListener listener) {
+		SingleSensorVIew[] sensorViewArray=sensorView.get(SensorGroup.NORTH);
+		for(int i=0;i<sensorViewArray.length;i++){
+			sensorViewArray[i].addMouseListener(listener);
+		}
+	}
+	
+	
 	public int[] getSensorXY(int i)
 	{
 		int[] xy = {0,0};

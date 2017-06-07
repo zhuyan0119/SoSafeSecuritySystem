@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import sensorview.SingleSensorVIew;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -18,6 +19,8 @@ public class SensorConfigureController extends JPanel
 	private JComboBox groupCombo;
 	private JLabel groupLabel,startTimeLabel,endTimeLabel;
 	private JTextField sTTextField, eTTextField;
+	
+	private SimulationController simulationController;
 
 	public SensorConfigureController(SensorBank controlledSensorBank, SensorSchedule controlledSensorSchedule)
 	{
@@ -32,6 +35,7 @@ public class SensorConfigureController extends JPanel
 		sTTextField = new JTextField(10);
 		eTTextField = new JTextField(10);
 
+		simulationController = new SimulationController(controlledSensorBank);
 
 
 
@@ -47,6 +51,8 @@ public class SensorConfigureController extends JPanel
 		add(endTimeLabel);
 		add(eTTextField);
 		add(scheduleButton);
+		add(simulationController);
+		
 
 
 		scheduleButton.addActionListener(new ActionListener()
@@ -89,7 +95,7 @@ public class SensorConfigureController extends JPanel
       	});
       	return groupCombo;
 	}
-
+	
 }
 
 

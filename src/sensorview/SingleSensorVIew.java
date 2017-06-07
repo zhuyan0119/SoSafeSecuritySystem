@@ -6,10 +6,12 @@ import model.Sensor;
 import model.SensorGroup;
 
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SingleSensorVIew extends JLabel implements Observer {
+public class SingleSensorVIew extends JLabel implements Observer, MouseListener {
 	protected static final int LABEL_WIDTH = 65;
 	protected static final int LABEL_HEIGHT = 65;
 	
@@ -41,41 +43,17 @@ public class SingleSensorVIew extends JLabel implements Observer {
 		this.setLocation(locationX, locationY);
 		
 		sensor.addObserver(this);
+		addMouseListener(this);
 	}
 	
-	
-	
-	
-	
-	
-	
-	/*
-	public SingleSensorVIew (String sensorId, String text, SensorGroup group, int locationX, int locationY, String[] filename){
-		super();
-		// import Icons and set size
-		sensorOff = getResizeImageIcon(filename[0], LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorOn = getResizeImageIcon(filename[1], LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		sensorAlert = getResizeImageIcon(filename[2], LABEL_HEIGHT-25, LABEL_WIDTH-25);
-		
-		//setting of the icon
-		//this.setText(text);
-		this.setIcon(sensorOff);
-		this.setSize(LABEL_HEIGHT, LABEL_WIDTH);
-		this.setLocation(locationX, locationY);
-			
-		this.sensorId = sensorId;
-		this.sensorGroup = group;
-	}
-	*/
-	
-	
+
 	public void setImageIcon(Sensor sensor){
 		
 		int status = sensor.getstatus();
 		
 		if(status==1){
 			this.setIcon(sensorOn);
-			System.out.println("setImageIcon: sensorOn"+" "+status);
+			
 		}
 		if(status==-1){
 			this.setIcon(sensorAlert);
@@ -83,7 +61,6 @@ public class SingleSensorVIew extends JLabel implements Observer {
 		}
 			
 		if(status==0){
-			System.out.println("setImageIcon: sensorOff"+status);
 			this.setIcon(sensorOff );
 		}
 	}
@@ -114,6 +91,45 @@ public class SingleSensorVIew extends JLabel implements Observer {
 	public void update(Observable o, Object arg) {
 		setImageIcon(sensor);
 		updateUI();
+	}
+
+
+	public void mouseClicked(MouseEvent e) {
+		if(!sensor.getAutomation()){
+			if(sensor.getstatus()==0)
+				sensor.setSensorOn();
+			else 
+				if(sensor.getstatus()==1)
+					sensor.setSensorOff();
+		}	
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
