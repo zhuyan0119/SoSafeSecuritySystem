@@ -50,7 +50,7 @@ public class ScheduleShowView extends JPanel
 		
 	}
 
-	public static void main(String args[])	
+	/*public static void main(String args[])	
 	{
 		SensorSchedule ss = new SensorSchedule();
 		ScheduleShowView  ssv = new ScheduleShowView(ss);
@@ -65,6 +65,7 @@ public class ScheduleShowView extends JPanel
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
+	*/
 	
 
 
