@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import model.SensorBank;
 import model.SensorSchedule;
-import model.BillingInfo;;
+import model.BillingInfo;
 import view.*;
 
 public class PanelTab extends JTabbedPane {
@@ -20,7 +20,7 @@ public class PanelTab extends JTabbedPane {
 	
 	public PanelTab(SensorBank sensorbank, SensorSchedule sensorSchedule, BillingInfo billingInfo) {
 		installationView = new InstallationView(sensorbank);
-		configureView = new ConfigureView(sensorbank,sensorSchedule);
+		configureView = new ConfigureView(sensorbank,sensorSchedule,billingInfo);
 		billView = new BillView(billingInfo);
 		
 		addTab("Installation", installationView);

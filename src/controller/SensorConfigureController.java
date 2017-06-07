@@ -22,7 +22,7 @@ public class SensorConfigureController extends JPanel
 	
 	private SimulationController simulationController;
 
-	public SensorConfigureController(SensorBank controlledSensorBank, SensorSchedule controlledSensorSchedule)
+	public SensorConfigureController(SensorBank controlledSensorBank, SensorSchedule controlledSensorSchedule,BillingInfo bill)
 	{
 		super();
 		sensorBank  = controlledSensorBank;
@@ -35,7 +35,7 @@ public class SensorConfigureController extends JPanel
 		sTTextField = new JTextField(10);
 		eTTextField = new JTextField(10);
 
-		simulationController = new SimulationController(controlledSensorBank);
+		simulationController = new SimulationController(controlledSensorBank,bill);
 
 
 

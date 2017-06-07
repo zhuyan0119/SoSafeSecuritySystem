@@ -8,7 +8,7 @@ public class SensorBank extends Observable{
 	//private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
 	private PassWordData pw;
-	private Boolean automation;
+	public Boolean automation;
 	//private Map<SensorGroup, int[]> firesensorID;
 	//private Map<SensorGroup,int[]> intrudersensorID;
 	

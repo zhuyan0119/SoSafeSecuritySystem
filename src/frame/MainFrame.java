@@ -48,6 +48,7 @@ public class MainFrame extends JFrame {
 		SensorBank sensorbank = new SensorBank();
 		SensorSchedule schedule = new SensorSchedule();
         BillingInfo billingInfo = new BillingInfo();
+        
 		MainFrame frame = new MainFrame(sensorbank,schedule, billingInfo);
 		frame.go();
 		frame.setVisible(true);

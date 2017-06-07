@@ -11,7 +11,7 @@ public abstract class Sensor extends Observable
 	private int  sensorID;
 	private String sensorType;
 	
-	private boolean automation=false;
+	public boolean automation;
 	
 	private int status; // 0 for OFF, 1 for ON ,  -1 for Alert!
 	
@@ -22,6 +22,7 @@ public abstract class Sensor extends Observable
 		status=0;//default sensor status is off
 		sensorID = nextID;
 		nextID ++;
+		automation = false;
 
 	}
 
