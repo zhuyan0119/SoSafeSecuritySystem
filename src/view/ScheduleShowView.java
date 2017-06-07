@@ -67,6 +67,7 @@ public class ScheduleShowView extends JPanel
 	}
 	*/
 	
+	
 
 
 }

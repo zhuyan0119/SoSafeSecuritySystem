@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 import sensorview.SingleSensorVIew;
+import view.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -23,7 +24,8 @@ public class SensorConfigureController extends JPanel
 	private SimulationController simulationController;
 	private AutomationController automationController;
 
-	//private ScheduleShowView scheduleShowView;
+	private ScheduleShowView scheduleShowView;
+
 
 	public SensorConfigureController(SensorBank controlledSensorBank, SensorSchedule controlledSensorSchedule,BillingInfo bill)
 	{
@@ -39,8 +41,10 @@ public class SensorConfigureController extends JPanel
 		eTTextField = new JTextField(10);
 
 		automationController = new AutomationController(controlledSensorBank);
-		//scheduleShowView = new ScheduleShowView(controlledSensorSchedule);
 		simulationController = new SimulationController(controlledSensorBank,bill);
+
+		scheduleShowView = new ScheduleShowView(sensorSchedule);
+
 
 
 
@@ -50,6 +54,8 @@ public class SensorConfigureController extends JPanel
 		JButton scheduleButton = new JButton("Schedule ");
 
 		setLayout(new GridLayout(5,8));
+		add(automationController);
+		
 		JPanel groupPanel = new JPanel();
 		add(groupPanel);
 		groupPanel.add(groupLabel);
@@ -68,7 +74,10 @@ public class SensorConfigureController extends JPanel
 
 		//add(scheduleButton);
 		add(simulationController);
-		add(automationController);
+		
+
+		add(scheduleShowView);
+
 		
 
 

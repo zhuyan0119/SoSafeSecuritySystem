@@ -19,6 +19,7 @@ public class ConfigureView extends JPanel
 	//private LoginController loginController;
 	//private SensorConfigureView sensorConfigureView;
 	//private SensorConfigureController configureController;
+	//private ScheduleShowView scheduleShowView;
 
 	
 	
@@ -29,11 +30,13 @@ public class ConfigureView extends JPanel
 		SensorConfigureView sensorConfigureView = new SensorConfigureView(sensorBank);
 		SensorConfigureController configureController = new SensorConfigureController(sensorBank,sensorSchedule,bill);
 		LoginController loginController = new LoginController(sensorBank.getPassWordData(),configureController);
+		//scheduleShowView = new ScheduleShowView(sensorSchedule);
 
 		add(sensorConfigureView);
 		add(loginController);
 		setLayout(new GridLayout(1,2));
 		add(configureController);
+		//add(scheduleShowView);
 		
 	}
 	
