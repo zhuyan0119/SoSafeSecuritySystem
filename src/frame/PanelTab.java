@@ -22,7 +22,8 @@ public class PanelTab extends JTabbedPane {
 		installationView = new InstallationView(sensorbank);
 		configureView = new ConfigureView(sensorbank,sensorSchedule);
 		billView = new BillView(billingInfo);
-		
+        billingInfo.addObserver(billView);
+	    	
 		addTab("Installation", installationView);
 		addTab("Configure", configureView);
 		addTab("Bill", billView);

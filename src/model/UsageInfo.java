@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-class UsageInfo implements Observer
+class UsageInfo
 {
     private static final Integer INTRUSION_INSTALL_COST = 200;
     private static final Integer INTRUSION_SENSOR_COST = 50;
@@ -16,8 +16,25 @@ class UsageInfo implements Observer
     private Integer numIntruderAlarmCalls = 0;
     private Integer numFireAlarmCalls = 0;
 
-    public void update(Observable observable, Object input) {
-        //TODO
+    public void update(SensorBank sensorBank) {
+        numFireSensors = 0;
+        numIntruderSensors = 0;
+		for (int j = 0; j < SensorGroup.values().length; j++)
+		{
+			SensorGroup sg = SensorGroup.values()[j];
+			Sensor[] sensorArray= sensorBank.getGroup(sg);
+			for(int i = 0; i < sensorArray.length; i++)
+			{
+                Sensor sensor = sensorArray[i];
+                if (sensor != null) {
+                    if (sensor instanceof FireSensor) {
+                        numFireSensors += 1;
+                    } else if (sensor instanceof IntruderSensor) {
+                        numIntruderSensors += 1;
+                    }
+                }
+			}
+		}
     }
     
     public void incrementNumIntruderAlarmCalls() {
