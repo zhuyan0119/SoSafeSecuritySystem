@@ -14,7 +14,7 @@ public class SensorBank extends Observable{
 	
 	public SensorBank()
 	{
-		System.out.println("construct sensor bank");
+	
 		Sensor[] northGroup = new Sensor[3];
 		Sensor[] southGroup = new Sensor[3];
  		Sensor[] eastGroup = new Sensor[3];
@@ -60,6 +60,17 @@ public class SensorBank extends Observable{
 	public void setAutomation(boolean auto)
 	{
 		automation = auto;
+	}
+	public void updateSensorAutomation(){
+		SensorGroup[] sg = SensorGroup.values();
+		for(int i=0; i<sg.length;i++){
+			Sensor [] sensorArray = groupSensorMap.get(sg[i]);
+			for(int j=0;j<sensorArray.length;j++){
+				if(checkInstalledOrNot(sg[i],j)){
+					sensorArray[j].setAutomation(getAutomation());
+				}
+			}
+		}
 	}
 	
 }

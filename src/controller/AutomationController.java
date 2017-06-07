@@ -31,17 +31,19 @@ public class AutomationController extends JPanel
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				if (controllButton.getText().equals("on")) 
+				if (sensorBank.getAutomation()) 
 				{
 					sensorBank.setAutomation(false);
+					sensorBank.updateSensorAutomation();
 					//controllButton.setText("off");
-					controllButton.setText("off");
+					controllButton.setText("OFF");
 
 				}
 				 else 
 				 {
 					sensorBank.setAutomation(true);
-					controllButton.setText("on");
+					sensorBank.updateSensorAutomation();
+					controllButton.setText("ON");
 				}
 			}
 

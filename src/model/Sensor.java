@@ -41,6 +41,10 @@ public abstract class Sensor extends Observable
 		return automation;
 	}
 	
+	public boolean setAutomation(boolean auto){
+		return this.automation=auto;
+	}
+	
 	// change sensor status to ON
 	public void setSensorOn(){
 		this.status = 1;

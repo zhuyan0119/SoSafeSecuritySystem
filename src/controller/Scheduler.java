@@ -38,9 +38,12 @@ public class Scheduler implements Runnable {
 				e.printStackTrace();
 			}
 			now = LocalDateTime.now();
+			System.out.println(now);
 			//System.out.println(LocalDateTime.now());
-			if(automation){
+			if(sensorBank.getAutomation()){
+				System.out.println("automation is:"+automation);
 				if(isInSchedule()){
+					System.out.println("in schedule");
 					// turn on all sensors installed in this section
 					for(int i=0;i<sensorArray.length;i++){
 						if (sensorBank.checkInstalledOrNot(sg,i)){
