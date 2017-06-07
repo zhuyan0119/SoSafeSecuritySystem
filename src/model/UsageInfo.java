@@ -27,6 +27,8 @@ class UsageInfo implements Observer
     public void incrementNumFireAlarmCalls() {
         numFireAlarmCalls += 1;
     }
+    
+   
 
     public String generateBill() {
         StringBuilder bill = new StringBuilder();

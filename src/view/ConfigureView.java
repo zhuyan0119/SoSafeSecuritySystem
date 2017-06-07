@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import controller.*;
 import controller.SensorInstallController;
+import model.BillingInfo;
 import model.SensorBank;
 import model.SensorSchedule;
 import sensorview.*;
@@ -22,17 +23,18 @@ public class ConfigureView extends JPanel
 	
 	
 	// constructor
-	public ConfigureView(SensorBank sensorBank,SensorSchedule sensorSchedule)
+	public ConfigureView(SensorBank sensorBank,SensorSchedule sensorSchedule,BillingInfo bill)
 	{
 		
 		SensorConfigureView sensorConfigureView = new SensorConfigureView(sensorBank);
-		SensorConfigureController configureController = new SensorConfigureController(sensorBank,sensorSchedule);
+		SensorConfigureController configureController = new SensorConfigureController(sensorBank,sensorSchedule,bill);
 		LoginController loginController = new LoginController(sensorBank.getPassWordData(),configureController);
+
 		add(sensorConfigureView);
 		add(loginController);
 		setLayout(new GridLayout(1,2));
+		add(configureController);
 		
-
 	}
 	
 
