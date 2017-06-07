@@ -20,11 +20,11 @@ public class MainFrame extends JFrame {
 	PanelTab panelTab;
 	
 	//constructor to initiate frame and panelTab
-	public MainFrame(SensorBank sensorBank,SensorSchedule sensorSchedule){
+	public MainFrame(SensorBank sensorBank, SensorSchedule sensorSchedule, BillingInfo billingInfo){
 		super ("So Safe System");
 		this.sensorBank = sensorBank;
 		this.sensorSchedule=sensorSchedule;
-		panelTab = new PanelTab(sensorBank,sensorSchedule);
+		panelTab = new PanelTab(sensorBank, sensorSchedule, billingInfo);
 		
 		add(panelTab);
 		setSize(900,500);
@@ -47,7 +47,8 @@ public class MainFrame extends JFrame {
 		
 		SensorBank sensorbank = new SensorBank();
 		SensorSchedule schedule = new SensorSchedule();
-		MainFrame frame = new MainFrame(sensorbank,schedule);
+        BillingInfo billingInfo = new BillingInfo();
+		MainFrame frame = new MainFrame(sensorbank,schedule, billingInfo);
 		frame.go();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

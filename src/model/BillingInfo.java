@@ -1,13 +1,21 @@
 package model;
 import java.util.*;
 
-class BillingInfo 
+public class BillingInfo 
 {
     private CustomerInfo customerInfo = new CustomerInfo("CustomerInfo.txt");
     private UsageInfo usageInfo = new UsageInfo();
     
     public void addUsageInfoToObservable(Observable ob) {
         ob.addObserver(usageInfo);
+    }
+
+    public void incrementNumIntruderAlarmCalls() {
+        usageInfo.incrementNumIntruderAlarmCalls();
+    }
+
+    public void incrementNumFireAlarmCalls() {
+        usageInfo.incrementNumFireAlarmCalls();
     }
 
     public String generateBill() {

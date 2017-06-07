@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import model.SensorBank;
 import model.SensorSchedule;
+import model.BillingInfo;;
 import view.*;
 
 public class PanelTab extends JTabbedPane {
@@ -17,10 +18,10 @@ public class PanelTab extends JTabbedPane {
 	private SensorSchedule sensorSchedule;
 	// PanelTab constructor to initialize three views with  data membranes of sensormap, schedule and bill 
 	
-	public PanelTab(SensorBank sensorbank, SensorSchedule sensorSchedule) {
+	public PanelTab(SensorBank sensorbank, SensorSchedule sensorSchedule, BillingInfo billingInfo) {
 		installationView = new InstallationView(sensorbank);
 		configureView = new ConfigureView(sensorbank,sensorSchedule);
-		billView = new BillView();
+		billView = new BillView(billingInfo);
 		
 		addTab("Installation", installationView);
 		addTab("Configure", configureView);

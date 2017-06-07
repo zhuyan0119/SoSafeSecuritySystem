@@ -16,15 +16,16 @@ class UsageInfo implements Observer
     private Integer numIntruderAlarmCalls = 0;
     private Integer numFireAlarmCalls = 0;
 
-    public UsageInfo() {
-        numIntruderSensors = 1;
-        numFireSensors = 1;
-        numIntruderAlarmCalls = 1;
-        numFireAlarmCalls = 1;
-    }
-
     public void update(Observable observable, Object input) {
         //TODO
+    }
+    
+    public void incrementNumIntruderAlarmCalls() {
+        numIntruderAlarmCalls += 1;
+    }
+
+    public void incrementNumFireAlarmCalls() {
+        numFireAlarmCalls += 1;
     }
 
     public String generateBill() {

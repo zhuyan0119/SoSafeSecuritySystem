@@ -9,6 +9,8 @@ public class SensorBank extends Observable{
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
 	private PassWordData pw;
 	private Boolean automation;
+	//private Map<SensorGroup, int[]> firesensorID;
+	//private Map<SensorGroup,int[]> intrudersensorID;
 	
 	public SensorBank()
 	{
@@ -22,9 +24,8 @@ public class SensorBank extends Observable{
 		groupSensorMap.put(SensorGroup.EAST, eastGroup);
 		groupSensorMap.put(SensorGroup.WEST, westGroup);
 		pw = new PassWordData();
-		automation = true;
+		automation = false;
 	
-
 	}
 	
 	public Sensor[] getGroup(SensorGroup group)
@@ -60,14 +61,5 @@ public class SensorBank extends Observable{
 	{
 		automation = auto;
 	}
-	
-	public void turnOngroupSensor(){
-		
-	}
-	
-	public void turnOffgorupSensor(){
-		
-	}
-
 	
 }

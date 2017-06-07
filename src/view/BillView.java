@@ -5,13 +5,12 @@ import model.*;
 
 
 public class BillView extends JPanel {
-	private Bill bill;
-	private JTable customerInfo;
-	private JScrollPane sp;
-	private Object[][] information = new Object[4][2];
-	
 	//constructor
-	public BillView(){
+	public BillView(BillingInfo bi){
+        JTextArea ta = new JTextArea();
+        ta.append(bi.generateBill());
+        JScrollPane sp = new JScrollPane(ta);
+        add(sp);
 		
 	}
 

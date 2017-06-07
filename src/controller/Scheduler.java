@@ -29,7 +29,7 @@ public class Scheduler implements Runnable {
 	public void run() {
 		while(true){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -38,13 +38,11 @@ public class Scheduler implements Runnable {
 			System.out.println(LocalDateTime.now());
 			if(automation){
 				if(isInSchedule()){
-					System.out.println("in schedule");
 					// turn on all sensors installed in this section
 					for(int i=0;i<sensorArray.length;i++){
 						if (sensorBank.checkInstalledOrNot(sg,i)){
 							if(sensorArray[i].getstatus()==0)
 							sensorArray[i].setSensorOn();
-							System.out.println(sensorArray[i].getstatus());
 						}
 					}
 				}
@@ -53,7 +51,6 @@ public class Scheduler implements Runnable {
 					// is not inSchedule turn off all installed sensor in this section
 					for(int j=0;j<sensorArray.length;j++){
 						if (sensorBank.checkInstalledOrNot(sg,j)){
-							System.out.println(sensorArray[j].getstatus());
 							if(sensorArray[j].getstatus()==1)
 							sensorArray[j].setSensorOff();
 						}
