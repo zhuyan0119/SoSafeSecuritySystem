@@ -17,9 +17,15 @@ public class AutomationController extends JPanel
 	{
 		super();
 		sensorBank = controlledSensorBank;
-		autoLabel = new JLabel("Auto Control");
+		autoLabel = new JLabel("Auto Control is");
 
-		final JButton controllButton = new JButton("off");
+		JButton controllButton = new JButton();
+		if(sensorBank.getAutomation()){
+			controllButton.setText("ON");
+			
+		}
+		else
+			controllButton.setText("Off");
 
 		controllButton.addActionListener(new ActionListener()
 		{
@@ -44,20 +50,5 @@ public class AutomationController extends JPanel
 
 	}
 
-	public static void main(String args[])	
-	{
-		SensorBank sb = new SensorBank();
-		AutomationController ac = new AutomationController(sb);
-		
-		
-		JFrame f = new JFrame();
-		f.getContentPane().add(ac);
-		f.setLayout(new FlowLayout());
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-	
 
 }
