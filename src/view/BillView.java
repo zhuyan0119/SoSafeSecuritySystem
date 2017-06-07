@@ -7,12 +7,10 @@ import model.*;
 public class BillView extends JPanel {
 	//constructor
 	public BillView(BillingInfo bi){
-        JScrollPane sp = new JScrollPane();
         JTextArea ta = new JTextArea();
         ta.append(bi.generateBill());
+        JScrollPane sp = new JScrollPane(ta);
         add(sp);
-        sp.add(ta);
-        ta.sizeSize(sp.getPreferredSize());
 		
 	}
 
