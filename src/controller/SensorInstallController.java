@@ -13,6 +13,9 @@ public class SensorInstallController extends JPanel
 {
 	private SensorBank sensorbank;
 	//private PassWordData passworddata;
+	JLabel groupLabel,positionLabel,sensorLabel;
+	JComboBox cbx1,cbx2,cbx3;
+	
 
 	
 
@@ -21,15 +24,15 @@ public class SensorInstallController extends JPanel
 	{
 		
 		super();
-		passwordController = new PasswordController(controlledSensorBank);
+		PasswordController passwordController = new PasswordController(controlledSensorBank);
 		sensorbank = controlledSensorBank;
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
 		sensorLabel = new JLabel("Sensor Type ");
 
-		JComboBox cbx1 = groupComboBox();
-		JComboBox cbx2 = positionComboBox();
-		JComboBox cbx3 = sensorComboBox();
+		cbx1 = groupComboBox();
+		cbx2 = positionComboBox();
+		cbx3 = sensorComboBox();
 
 
 		JButton installButton = new JButton("Install ");
@@ -75,7 +78,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox groupComboBox()
 	{
 		String[] group = {" ","NORTH","SOUTH","EAST","WEST"};
-		groupCombo = new JComboBox(group);
+		JComboBox groupCombo = new JComboBox(group);
 
 		groupCombo.setForeground(Color.BLUE);
 		groupCombo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -96,7 +99,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox positionComboBox()
 	{
 		String[] position = {" ","Position1","Position2","Position3"};
-		positionCombo = new JComboBox(position);
+		JComboBox positionCombo = new JComboBox(position);
 
 		positionCombo.setForeground(Color.BLUE);
 		positionCombo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -117,7 +120,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox sensorComboBox()
 	{
 		String[] sensorType = {" ", "FireSensor", "IntruderSensor"};
-		sensorCombo = new JComboBox(sensorType);
+		JComboBox sensorCombo = new JComboBox(sensorType);
 
 		sensorCombo.setForeground(Color.BLUE);
 		sensorCombo.setFont(new Font("Arial", Font.BOLD, 20));
