@@ -52,8 +52,13 @@ public class SensorBank extends Observable{
 		return pw;
 	}
 
-	public Boolean getAutomation() {
+	public Boolean getAutomation() 
+	{
 		return automation;
+	}
+	public void setAutomation(boolean auto)
+	{
+		automation = auto;
 	}
 	
 	public void turnOngroupSensor(){
