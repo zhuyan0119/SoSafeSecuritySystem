@@ -13,21 +13,29 @@ public class ConfigureView extends JPanel
 {
 	//private SensorBank sensorBank;
 	//private SensorSchedule sensorSchedule;
-	private SensorConfigureView sensorConfigureView;
-	private SensorConfigureController configureController;
+
+
+	//private LoginController loginController;
+	//private SensorConfigureView sensorConfigureView;
+	//private SensorConfigureController configureController;
+
+	
 	
 	// constructor
 	public ConfigureView(SensorBank sensorBank,SensorSchedule sensorSchedule)
 	{
 		
-		sensorConfigureView = new SensorConfigureView(sensorBank);
-		configureController = new SensorConfigureController(sensorBank,sensorSchedule);
+		SensorConfigureView sensorConfigureView = new SensorConfigureView(sensorBank);
+		SensorConfigureController configureController = new SensorConfigureController(sensorBank,sensorSchedule);
+		LoginController loginController = new LoginController(sensorBank.getPassWordData(),configureController);
 		add(sensorConfigureView);
-		add(configureController);
+		add(loginController);
 		setLayout(new GridLayout(1,2));
 		
 
 	}
+	
+
 
 }
 

@@ -27,12 +27,14 @@ public class AutomationController extends JPanel
 			{
 				if (controllButton.getText().equals("on")) 
 				{
-					sensorBank.setAutomation(true);
+					sensorBank.setAutomation(false);
+					//controllButton.setText("off");
 					controllButton.setText("off");
+
 				}
 				 else 
 				 {
-					sensorBank.setAutomation(false);
+					sensorBank.setAutomation(true);
 					controllButton.setText("on");
 				}
 			}
@@ -44,7 +46,7 @@ public class AutomationController extends JPanel
 
 	}
 
-	public static void main(String args[])	
+	/*public static void main(String args[])	
 	{
 		SensorBank sb = new SensorBank();
 		AutomationController ac = new AutomationController(sb);
@@ -58,6 +60,7 @@ public class AutomationController extends JPanel
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
+	*/
 	
 
 }

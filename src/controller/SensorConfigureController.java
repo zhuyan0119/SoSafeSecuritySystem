@@ -21,6 +21,9 @@ public class SensorConfigureController extends JPanel
 	private JTextField sTTextField, eTTextField;
 	
 	private SimulationController simulationController;
+	private AutomationController automationController;
+
+	//private ScheduleShowView scheduleShowView;
 
 	public SensorConfigureController(SensorBank controlledSensorBank, SensorSchedule controlledSensorSchedule)
 	{
@@ -36,6 +39,8 @@ public class SensorConfigureController extends JPanel
 		eTTextField = new JTextField(10);
 
 		simulationController = new SimulationController(controlledSensorBank);
+		automationController = new AutomationController(controlledSensorBank);
+		//scheduleShowView = new ScheduleShowView(controlledSensorSchedule);
 
 
 
@@ -43,15 +48,26 @@ public class SensorConfigureController extends JPanel
 
 		JButton scheduleButton = new JButton("Schedule ");
 
-		setLayout(new FlowLayout());
-		add(groupLabel);
-		add(cbx);
-		add(startTimeLabel);
-		add(sTTextField);
-		add(endTimeLabel);
-		add(eTTextField);
-		add(scheduleButton);
+		setLayout(new GridLayout(5,8));
+		JPanel groupPanel = new JPanel();
+		add(groupPanel);
+		groupPanel.add(groupLabel);
+		groupPanel.add(cbx);
+		add(groupPanel);
+		JPanel startTimePanel = new JPanel();
+		startTimePanel.add(startTimeLabel);
+		startTimePanel.add(sTTextField);
+        add(startTimePanel);
+        JPanel endTimePanel = new JPanel();
+        endTimePanel.add(endTimeLabel);
+		endTimePanel.add(eTTextField);
+		endTimePanel.add(scheduleButton);
+
+		add(endTimePanel);
+
+		//add(scheduleButton);
 		add(simulationController);
+		add(automationController);
 		
 
 

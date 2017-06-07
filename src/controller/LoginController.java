@@ -33,12 +33,15 @@ public class LoginController extends JPanel
 			public void actionPerformed(ActionEvent event)
 			{
 				boolean correctPass = passWord.checkPassWord(passWordTextField.getText());
-				System.out.println(correctPass);
 				if (correctPass)
 				{
 					scc.setVisible(true);
+					passWordLabel.setVisible(false);
+					passWordTextField.setVisible(false);
+					enterButton.setVisible(false);
+
 					updateUI();
-					System.out.println("hello world");
+
 				}	
 
 			}
