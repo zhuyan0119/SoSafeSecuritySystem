@@ -10,7 +10,7 @@ public class FireSensor extends Sensor{
 	// return the fire Icon file names
 	public String[] getIcon()
 	{
-		String[] fireIcon={"fire Off.jpeg","fire on.png","fire alert.png"};
+		String[] fireIcon={"fire Off.jpeg","fire on.png","fire alert.gif"};
 			
 		return fireIcon;
 	}
