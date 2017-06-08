@@ -1,0 +1,8 @@
+Service Contract ID:1234
+Customer Name:Tom
+Address:9876 Danger Street, Santa Clara, CA
+Contact Number 1:123-456-7890
+Contact Number 2:098-765-4321
+Customer Email:DangerTom@gmail.com
+Start Date:01/01/2017
+End Date:01/01/2018

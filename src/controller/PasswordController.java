@@ -38,7 +38,7 @@ public class PasswordController extends JPanel
 				try
 				{
 					passWord.checkPwSetOrNot();
-					passWord.setPassWord(passWordLabel.getText());
+					passWord.setPassWord(passWordTextField.getText());
 					passWordTextField.setText("password setted!" );
 					passWordButton.setVisible(false);
 	

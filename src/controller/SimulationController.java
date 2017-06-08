@@ -3,11 +3,13 @@ package controller;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import model.BillingInfo;
 import model.FireSensor;
 import model.IntruderSensor;
 import model.Sensor;
@@ -19,10 +21,15 @@ public class SimulationController extends JPanel {
 	private JComboBox groupCombo, positionCombo;
 	private JButton fireButton, intruderButton;
 	private JLabel groupLabel, positionLabel;
-	
-	public SimulationController(SensorBank sensorbank){
+	private Timer fireTimer,intruderTimer;
+	private BillingInfo bill;
+	private ImageIcon fireService;	
+	private ImageIcon intruderService;
+
+	public SimulationController(SensorBank sensorbank,BillingInfo bill){
 		super();
 		this.sensorbank = sensorbank;
+		this.bill = bill;
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
 		JComboBox cbx1 = groupComboBox();
@@ -30,13 +37,36 @@ public class SimulationController extends JPanel {
 		
 		fireButton = new JButton("fire");
 		intruderButton = new JButton("intruder");
-		setLayout(new FlowLayout());
+		
+		JPanel panel1 = new JPanel();
+		panel1.add(groupLabel);
+		panel1.add(cbx1);
+		panel1.add(positionLabel);
+		panel1.add(cbx2);
+		
+		JPanel panel2 = new JPanel ();
+		panel2.add(fireButton);
+		panel2.add(intruderButton);
+		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		//layout.setVgap(3);
+		//this.setLayout(layout);
+		
+		add(panel1);
+		add(panel2);
+		
+		/*
 		add(groupLabel);
 		add(cbx1);
 		add(positionLabel);
 		add(cbx2);
 		add(fireButton);
 		add(intruderButton);
+		*/
+		fireService =new ImageIcon("fire service.jpg");
+
+				
+
 		
 		// fireBtton is to turn on the fire sensor in the chosen section, and chosen location ( only if installed and status is on). 
 		
@@ -50,12 +80,16 @@ public class SimulationController extends JPanel {
 					if(sensorbank.checkInstalledOrNot(sg,i)){
 						if(sensorArray[i]instanceof FireSensor){
 							sensorArray[i].setOnSensorAlert();
-						}
+							fireTimer.setRepeats(false);
+							fireTimer.start();	
 					}
 				}
 						
 			}
-		});
+		}
+	});
+
+
 		
 		// intruderBtton is to turn on the fire sensor in the chosen section, and chosen location ( only if installed and status is on).
 		intruderButton.addActionListener(new ActionListener(){
@@ -67,12 +101,33 @@ public class SimulationController extends JPanel {
 					if(sensorbank.checkInstalledOrNot(sg,i)){
 						if(sensorArray[i]instanceof IntruderSensor){
 							sensorArray[i].setOnSensorAlert();
+							intruderTimer.setRepeats(false); 
+							intruderTimer.start();    
 						}
 					}
 				}
 						
 			}
 		});
+		
+		// initiate timer
+		fireTimer = new Timer(1000*10, new ActionListener() {
+		      @Override
+		      public void actionPerformed(ActionEvent e) {
+		    	 //JOptionPane.setMessage("fire alarm, call phone 1234567");
+		        
+		        JOptionPane.showMessageDialog(fireButton,"call 123-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
+		        bill.incrementNumFireAlarmCalls();
+		      }
+		    });
+		
+		intruderTimer = new Timer(1000*10, new ActionListener() {
+		      @Override
+		      public void actionPerformed(ActionEvent e) {
+		    	  JOptionPane.showMessageDialog(intruderButton,"call 321-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
+		        bill.incrementNumIntruderAlarmCalls();
+		      }
+		    });
 
 	}
 	
@@ -118,5 +173,17 @@ public class SimulationController extends JPanel {
       	return positionCombo;
 
 	}
+	
+	public void fireAlertTimer(){
+		
+	}
+	
+	public void intruderAlertTimer(){
+		
+	}
+	
+	
+ }
 
-}
+
+

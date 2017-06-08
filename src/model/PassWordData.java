@@ -36,10 +36,10 @@ public class PassWordData
 	}
 	public boolean checkPassWord(String newPswd)
 	{
-		//System.out.println("DEBUG0");
-		//System.out.println(passWord);
-		//System.out.println(newPswd);
-		//System.out.println(newPswd.equals(passWord));
+		System.out.println("DEBUG0");
+		System.out.println(passWord);
+		System.out.println(newPswd);
+		System.out.println(newPswd.equals(passWord));
 		return newPswd.equals(passWord);
 	}
 

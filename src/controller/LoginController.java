@@ -33,12 +33,15 @@ public class LoginController extends JPanel
 			public void actionPerformed(ActionEvent event)
 			{
 				boolean correctPass = passWord.checkPassWord(passWordTextField.getText());
-				System.out.println(correctPass);
 				if (correctPass)
 				{
 					scc.setVisible(true);
+					passWordLabel.setVisible(false);
+					passWordTextField.setVisible(false);
+					enterButton.setVisible(false);
+
 					updateUI();
-					System.out.println("hello world");
+
 				}	
 
 			}
@@ -50,7 +53,7 @@ public class LoginController extends JPanel
 		scc.setVisible(false);
 
 	}
-	public static void main(String args[])	
+	/*public static void main(String args[])	
 	{
 		SensorBank sb = new SensorBank();
 		SensorSchedule  ss = new SensorSchedule();
@@ -67,5 +70,6 @@ public class LoginController extends JPanel
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
+	*/
 
 }

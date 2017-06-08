@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 		panelTab = new PanelTab(sensorBank, sensorSchedule, billingInfo);
 		
 		add(panelTab);
-		setSize(900,500);
+		setSize(1000,600);
 		
 	}
 	
@@ -35,11 +35,11 @@ public class MainFrame extends JFrame {
 		Scheduler north = new Scheduler(SensorGroup.NORTH,sensorSchedule,sensorBank);
 		new Thread(north).start();
 		Scheduler east = new Scheduler(SensorGroup.EAST,sensorSchedule,sensorBank);
-		new Thread(east).start();
+		//new Thread(east).start();
 		Scheduler west = new Scheduler(SensorGroup.WEST,sensorSchedule,sensorBank);
-		new Thread(west).start();
+		//new Thread(west).start();
 		Scheduler south = new Scheduler(SensorGroup.SOUTH,sensorSchedule,sensorBank);
-		new Thread(south).start();
+		//new Thread(south).start();
 	}
 
 	public static void main(String[] args) {

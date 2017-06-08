@@ -1,7 +1,9 @@
 package controller;
 
 import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.*;
 
@@ -24,6 +26,7 @@ public class Scheduler implements Runnable {
     	 sensorArray=sensorBank.getGroup(sg);
     	 //this.scheduler = new Thread(this);
     	 //this.scheduler.start();
+
      }
      
 	public void run() {
@@ -35,9 +38,12 @@ public class Scheduler implements Runnable {
 				e.printStackTrace();
 			}
 			now = LocalDateTime.now();
-			System.out.println(LocalDateTime.now());
-			if(automation){
+			System.out.println(now);
+			//System.out.println(LocalDateTime.now());
+			if(sensorBank.getAutomation()){
+				System.out.println("automation is:"+automation);
 				if(isInSchedule()){
+					System.out.println("in schedule");
 					// turn on all sensors installed in this section
 					for(int i=0;i<sensorArray.length;i++){
 						if (sensorBank.checkInstalledOrNot(sg,i)){
