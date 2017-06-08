@@ -3,6 +3,7 @@ package controller;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,13 +37,32 @@ public class SimulationController extends JPanel {
 		
 		fireButton = new JButton("fire");
 		intruderButton = new JButton("intruder");
-		setLayout(new FlowLayout());
+		
+		JPanel panel1 = new JPanel();
+		panel1.add(groupLabel);
+		panel1.add(cbx1);
+		panel1.add(positionLabel);
+		panel1.add(cbx2);
+		
+		JPanel panel2 = new JPanel ();
+		panel2.add(fireButton);
+		panel2.add(intruderButton);
+		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		//layout.setVgap(3);
+		//this.setLayout(layout);
+		
+		add(panel1);
+		add(panel2);
+		
+		/*
 		add(groupLabel);
 		add(cbx1);
 		add(positionLabel);
 		add(cbx2);
 		add(fireButton);
 		add(intruderButton);
+		*/
 		fireService =new ImageIcon("fire service.jpg");
 
 				

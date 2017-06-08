@@ -5,6 +5,7 @@ import sensorview.SingleSensorVIew;
 import view.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
@@ -32,53 +33,85 @@ public class SensorConfigureController extends JPanel
 		super();
 		sensorBank  = controlledSensorBank;
 		sensorSchedule = controlledSensorSchedule;
-
+		automationController = new AutomationController(controlledSensorBank);
+		simulationController = new SimulationController(controlledSensorBank,bill);
+		scheduleShowView = new ScheduleShowView(sensorSchedule);
+		
 		groupLabel = new JLabel("Sensor Group ");
 		startTimeLabel = new JLabel("Start Time ");
 		endTimeLabel = new JLabel("End Time ");
-
+		JComboBox cbx = groupComboBox();
+		JButton scheduleButton = new JButton("Schedule ");
 		sTTextField = new JTextField(10);
 		eTTextField = new JTextField(10);
-
-		automationController = new AutomationController(controlledSensorBank);
-		simulationController = new SimulationController(controlledSensorBank,bill);
-
-		scheduleShowView = new ScheduleShowView(sensorSchedule);
-
-
-
-
-
-		JComboBox cbx = groupComboBox();
-
-		JButton scheduleButton = new JButton("Schedule ");
-
-		setLayout(new GridLayout(5,8));
-		add(automationController);
 		
+		
+		/*
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.gridx=0;
+		c.gridy=0;
+		c.insets=new Insets(0,0,0,0);
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.WEST;
+		this.add(automationController,c);
+		
+		c.gridx=0;
+	    c.gridy=2;
+	    this.add(groupLabel, c);
+	    c.gridx=1;
+	    c.gridy=2;
+	    this.add(cbx, c);
+	    */
+	    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+/* set the  layout of SensorConfigureView, which include,1) automationController, 2) scheduleView(scheduleController and schedule table view)
+	3) simulationcontriller	*/	
+
+		// automationController
+		//automationController.setLayout(new FlowLayout(FlowLayout.LEFT));
+		// scheduleView panel
+		JPanel schedulePanel = new JPanel();
+		
+		GridLayout schedulePaneLayout = new GridLayout(5,1);
+		schedulePanel.setLayout(schedulePaneLayout);
+		automationController.setPreferredSize(new Dimension(10,10));
+		schedulePanel.add(automationController);
 		JPanel groupPanel = new JPanel();
-		add(groupPanel);
 		groupPanel.add(groupLabel);
 		groupPanel.add(cbx);
-		add(groupPanel);
-		JPanel startTimePanel = new JPanel();
-		startTimePanel.add(startTimeLabel);
-		startTimePanel.add(sTTextField);
-        add(startTimePanel);
-        JPanel endTimePanel = new JPanel();
-        endTimePanel.add(endTimeLabel);
-		endTimePanel.add(eTTextField);
-		endTimePanel.add(scheduleButton);
-
-		add(endTimePanel);
-
-		//add(scheduleButton);
-		add(simulationController);
+		schedulePanel.add(groupPanel);
 		
-
-		add(scheduleShowView);
-
 		
+		JPanel setTimePanel = new JPanel();
+		setTimePanel.add(startTimeLabel);
+		setTimePanel.add(sTTextField);
+		setTimePanel.add(endTimeLabel);
+		setTimePanel.add(eTTextField);
+		
+		JPanel panelbutton = new JPanel();
+		panelbutton.setLayout(new FlowLayout());
+		panelbutton.add(scheduleButton);
+		
+		schedulePanel.add(setTimePanel);
+		schedulePanel.add(panelbutton);
+		schedulePanel.add(scheduleShowView);
+		
+		// set sensorConfigure Layout
+		this.setLayout(new GridLayout(2,1));
+		this.add(schedulePanel);
+		
+		this.add(simulationController);
 
 
 		scheduleButton.addActionListener(new ActionListener()
@@ -106,7 +139,7 @@ public class SensorConfigureController extends JPanel
 		groupCombo = new JComboBox(group);
 
 		groupCombo.setForeground(Color.BLUE);
-		groupCombo.setFont(new Font("Arial", Font.BOLD, 20));
+		groupCombo.setFont(new Font("Arial", Font.BOLD, 15));
       	groupCombo.setEditable(true);
 
       	groupCombo.addActionListener(new ActionListener()

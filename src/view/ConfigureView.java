@@ -32,10 +32,12 @@ public class ConfigureView extends JPanel
 		LoginController loginController = new LoginController(sensorBank.getPassWordData(),configureController);
 		//scheduleShowView = new ScheduleShowView(sensorSchedule);
 
-		add(sensorConfigureView);
-		add(loginController);
+		JPanel configure = new JPanel();
+		configure.add(loginController);
+		configure.add(configureController);
 		setLayout(new GridLayout(1,2));
-		add(configureController);
+		add(sensorConfigureView);
+		add(configure);
 		//add(scheduleShowView);
 		
 	}

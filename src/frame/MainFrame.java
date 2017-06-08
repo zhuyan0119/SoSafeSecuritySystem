@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 		panelTab = new PanelTab(sensorBank, sensorSchedule, billingInfo);
 		
 		add(panelTab);
-		setSize(900,500);
+		setSize(1000,600);
 		
 	}
 	
