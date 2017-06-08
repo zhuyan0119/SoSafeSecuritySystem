@@ -24,6 +24,7 @@ public class BillingInfo extends Observable implements Observer
         StringBuilder bill = new StringBuilder();
         bill.append("Customer Information:\n");
         bill.append(customerInfo.toString());
+        bill.append("\n");
         bill.append(usageInfo.generateBill());
         return bill.toString();
     }

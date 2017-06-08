@@ -60,6 +60,8 @@ class UsageInfo
             if (numIntruderSensors > 0) {
                 fireInstallCost = new Integer(new Double(FIRE_INSTALL_COST * 0.8).intValue());
             }
+
+            bill.append("\n");
             bill.append("Fire Detection:\n");
             bill.append("- Initial Installion Service Charge: " + fireInstallCost.toString() + "\n");
             bill.append("- Sensor Installion Charge: " + new Integer(numFireSensors * FIRE_SENSOR_COST).toString() + " (" + numFireSensors.toString() + " sensors at " + FIRE_SENSOR_COST.toString() + " per sensor)" + "\n");
