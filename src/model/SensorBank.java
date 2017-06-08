@@ -35,7 +35,6 @@ public class SensorBank extends Observable{
 	
 	public void insertSensor(Sensor sensor, SensorGroup sensorGroup, int position)
 	{
-		System.out.println("add sensor");
 		Sensor[] sensorArray = groupSensorMap.get(sensorGroup);
 		sensorArray[position] = sensor;
 		setChanged();
@@ -61,6 +60,8 @@ public class SensorBank extends Observable{
 	{
 		automation = auto;
 	}
+	
+	
 	public void updateSensorAutomation(){
 		SensorGroup[] sg = SensorGroup.values();
 		for(int i=0; i<sg.length;i++){

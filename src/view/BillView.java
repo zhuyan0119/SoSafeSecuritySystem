@@ -12,6 +12,7 @@ public class BillView extends JPanel implements Observer {
 	public BillView(BillingInfo bi){
         setLayout(new BorderLayout());
         ta = new JTextArea();
+        ta.setEditable(false);
         ta.append(bi.generateBill());
         JScrollPane sp = new JScrollPane(ta);
         add(sp);
