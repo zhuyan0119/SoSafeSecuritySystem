@@ -36,6 +36,8 @@ public class SensorConfigureController extends JPanel
 		automationController = new AutomationController(controlledSensorBank);
 		simulationController = new SimulationController(controlledSensorBank,bill);
 		scheduleShowView = new ScheduleShowView(sensorSchedule);
+
+        sensorSchedule.addObserver(scheduleShowView);
 		
 		groupLabel = new JLabel("Sensor Group ");
 		startTimeLabel = new JLabel("Start Time ");
