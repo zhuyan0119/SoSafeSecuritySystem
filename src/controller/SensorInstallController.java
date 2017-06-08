@@ -12,27 +12,26 @@ import java.util.*;
 public class SensorInstallController extends JPanel
 {
 	private SensorBank sensorbank;
-	//private PassWordData passworddata;
-	JLabel groupLabel,positionLabel,sensorLabel;
-	JComboBox cbx1,cbx2,cbx3;
-	
+	private PassWordData passworddata;
 
-	
+	private JComboBox groupCombo, positionCombo, sensorCombo;
+	private JLabel groupLabel, positionLabel,sensorLabel;
+	private PasswordController passwordController;
 
 	
 	public SensorInstallController(SensorBank controlledSensorBank)
 	{
 		
 		super();
-		PasswordController passwordController = new PasswordController(controlledSensorBank);
+		passwordController = new PasswordController(controlledSensorBank);
 		sensorbank = controlledSensorBank;
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
 		sensorLabel = new JLabel("Sensor Type ");
 
-		cbx1 = groupComboBox();
-		cbx2 = positionComboBox();
-		cbx3 = sensorComboBox();
+		JComboBox cbx1 = groupComboBox();
+		JComboBox cbx2 = positionComboBox();
+		JComboBox cbx3 = sensorComboBox();
 
 
 		JButton installButton = new JButton("Install ");
@@ -41,12 +40,27 @@ public class SensorInstallController extends JPanel
 		//setLayout(null);
 
 		setLayout(new FlowLayout());
-		add(sensorLabel);
-		add(cbx3);
-		add(groupLabel);
-		add(cbx1);
-		add(positionLabel);
-		add(cbx2);
+		JPanel typePanel = new JPanel();
+		typePanel.add(sensorLabel);
+		typePanel.add(cbx3);
+		add(typePanel);
+
+		//add(sensorLabel);
+		//add(cbx3);
+		JPanel groupPanel = new JPanel();
+		groupPanel.add(groupLabel);
+		groupPanel.add(cbx1);
+		add(groupPanel);
+
+		//add(groupLabel);
+		//add(cbx1);
+		JPanel positionPanel = new JPanel();
+		positionPanel.add(positionLabel);
+		positionPanel.add(cbx2);
+		add(positionPanel);
+
+		//add(positionLabel);
+		//add(cbx2);
 		add(installButton);
 		add(passwordController);
 		
@@ -78,7 +92,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox groupComboBox()
 	{
 		String[] group = {" ","NORTH","SOUTH","EAST","WEST"};
-		JComboBox groupCombo = new JComboBox(group);
+		groupCombo = new JComboBox(group);
 
 		groupCombo.setForeground(Color.BLUE);
 		groupCombo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -99,7 +113,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox positionComboBox()
 	{
 		String[] position = {" ","Position1","Position2","Position3"};
-		JComboBox positionCombo = new JComboBox(position);
+		positionCombo = new JComboBox(position);
 
 		positionCombo.setForeground(Color.BLUE);
 		positionCombo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -120,7 +134,7 @@ public class SensorInstallController extends JPanel
 	public JComboBox sensorComboBox()
 	{
 		String[] sensorType = {" ", "FireSensor", "IntruderSensor"};
-		JComboBox sensorCombo = new JComboBox(sensorType);
+		sensorCombo = new JComboBox(sensorType);
 
 		sensorCombo.setForeground(Color.BLUE);
 		sensorCombo.setFont(new Font("Arial", Font.BOLD, 20));
