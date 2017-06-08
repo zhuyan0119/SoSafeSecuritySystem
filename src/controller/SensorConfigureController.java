@@ -83,10 +83,15 @@ public class SensorConfigureController extends JPanel
 		// scheduleView panel
 		JPanel schedulePanel = new JPanel();
 		
-		GridLayout schedulePaneLayout = new GridLayout(5,1);
-		schedulePanel.setLayout(schedulePaneLayout);
+		//GridLayout schedulePaneLayout = new GridLayout(5,1);
+		//schedulePanel.setLayout(new BoxLayout(schedulePanel, BoxLayout.Y_AXIS));
+		
+		
+		
+		/*
 		automationController.setPreferredSize(new Dimension(10,10));
 		schedulePanel.add(automationController);
+		
 		JPanel groupPanel = new JPanel();
 		groupPanel.add(groupLabel);
 		groupPanel.add(cbx);
@@ -106,14 +111,42 @@ public class SensorConfigureController extends JPanel
 		schedulePanel.add(setTimePanel);
 		schedulePanel.add(panelbutton);
 		schedulePanel.add(scheduleShowView);
-		
+		simulationController.setPreferredSize(new Dimension(10,10));
 		// set sensorConfigure Layout
-		this.setLayout(new GridLayout(2,1));
-		this.add(schedulePanel);
 		
-		this.add(simulationController);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(schedulePanel);
+		add(simulationController);
+		
+		*/
 
+		JPanel groupPanel = new JPanel();
+		groupPanel.add(groupLabel);
+		groupPanel.add(cbx);
+		schedulePanel.add(groupPanel);
+		
+		
+		JPanel setTimePanel = new JPanel();
+		setTimePanel.add(startTimeLabel);
+		setTimePanel.add(sTTextField);
+		setTimePanel.add(endTimeLabel);
+		setTimePanel.add(eTTextField);
+		
+		JPanel panelbutton = new JPanel();
+		panelbutton.setLayout(new FlowLayout());
+		panelbutton.add(scheduleButton);
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(automationController);
+		add(groupPanel);
+		add(setTimePanel);
+		add(panelbutton);
+		add(scheduleShowView);
+		add(simulationController);
 
+		
+		
+		
 		scheduleButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent event)

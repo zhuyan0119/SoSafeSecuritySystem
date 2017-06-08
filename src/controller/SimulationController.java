@@ -45,10 +45,11 @@ public class SimulationController extends JPanel {
 		panel1.add(cbx2);
 		
 		JPanel panel2 = new JPanel ();
+		panel2.setLayout(new FlowLayout());
 		panel2.add(fireButton);
 		panel2.add(intruderButton);
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		//layout.setVgap(3);
 		//this.setLayout(layout);
 		
