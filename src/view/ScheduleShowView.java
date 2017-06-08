@@ -10,7 +10,7 @@ import java.awt.Dimension;
 
 import model.*;
 
-public class ScheduleShowView extends JPanel 
+public class ScheduleShowView extends JPanel implements Observer
 {
 	private SensorSchedule sensorSchedule;
 
@@ -48,6 +48,11 @@ public class ScheduleShowView extends JPanel
 			data[sg.ordinal()][0] = sg;
 		}
 		
+	}
+	public void update (Observable ob, Object arg)
+	{
+		fillData();
+		updateUI();
 	}
 
 	public static void main(String args[])	
