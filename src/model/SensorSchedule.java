@@ -38,4 +38,21 @@ public class SensorSchedule extends Observable
 		notifyObservers();
 
 	}
+	public void clearTimeRange()
+	{
+		ArrayList<TimeRange> northSchedule1 = new ArrayList<TimeRange>();
+		ArrayList<TimeRange> southSchedule2 = new ArrayList<TimeRange>();
+		ArrayList<TimeRange> eastSchedule3 = new ArrayList<TimeRange>();
+		ArrayList<TimeRange> westSchedule4 = new ArrayList<TimeRange>();
+		groupScheduleMap.put(SensorGroup.NORTH, northSchedule1);
+		groupScheduleMap.put(SensorGroup.SOUTH, southSchedule2);
+		groupScheduleMap.put(SensorGroup.EAST, eastSchedule3);
+		groupScheduleMap.put(SensorGroup.WEST, westSchedule4);
+		System.out.println("HI");
+
+		setChanged(); 
+		notifyObservers();
+
+	}
+	
 }
