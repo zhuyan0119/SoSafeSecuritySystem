@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.*;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -26,12 +28,17 @@ public class SimulationController extends JPanel {
 	private BillingInfo bill;
 	private ImageIcon fireService;	
 	private ImageIcon intruderService;
-    private JTextArea alarmLogTextArea;;
+    private JTextArea alarmLogTextArea;
+    private boolean responseCodeEntered;
+    private String responseCode;
+
 
 	public SimulationController(SensorBank sensorbank,BillingInfo bill){
 		super();
 		this.sensorbank = sensorbank;
 		this.bill = bill;
+        responseCodeEntered = false;
+        setResponseCode();
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
 		JComboBox cbx1 = groupComboBox();
@@ -47,18 +54,45 @@ public class SimulationController extends JPanel {
 		panel1.add(positionLabel);
 		panel1.add(cbx2);
 		
-		JPanel panel2 = new JPanel ();
+		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
 		panel2.add(fireButton);
 		panel2.add(intruderButton);
 		
+        JPanel panel3 = new JPanel();
+        panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
+        JButton responseCodeButton = new JButton("Enter Response Code");
+        JTextField responseCodeTextField = new JTextField();
+        responseCodeButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                String enteredCode = responseCodeTextField.getText();
+                if (enteredCode.equals(responseCode)) {
+                    responseCodeEntered = true;
+                    SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
+                    Sensor[] sensorArray = sensorbank.getGroup(sg);
+                    for(int i=0;i<sensorArray.length;i++){
+                        if(sensorbank.checkInstalledOrNot(sg,i)){
+                            if(sensorArray[i].getstatus() == -1)
+                            sensorArray[i].setOffSensorAlert();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(intruderButton, "Response code incorrect","service",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        panel3.add(responseCodeButton);
+        panel3.add(responseCodeTextField);
+
         alarmLogTextArea = new JTextArea();
         alarmLogTextArea.setEditable(false);
         JScrollPane alarmLogScrollPane = new JScrollPane(alarmLogTextArea);
-		JPanel panel3 = new JPanel ();
-		panel3.setLayout(new BorderLayout());
-        panel3.add(alarmLogScrollPane);
-
+		JPanel panel4 = new JPanel();
+		panel4.setLayout(new BorderLayout());
+        panel4.add(alarmLogScrollPane);
+        
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		//layout.setVgap(3);
 		//this.setLayout(layout);
@@ -66,6 +100,7 @@ public class SimulationController extends JPanel {
 		add(panel1);
 		add(panel2);
         add(panel3);
+        add(panel4);
 		
 		/*
 		add(groupLabel);
@@ -93,8 +128,9 @@ public class SimulationController extends JPanel {
 						if(sensorArray[i]instanceof FireSensor){
 							if(sensorArray[i].getstatus()==1){
 								sensorArray[i].setOnSensorAlert();
-								fireTimer.setRepeats(false);
+								fireTimer.setRepeats(true);
 								fireTimer.start();
+                                break;
 							}
 								
 					}
@@ -117,8 +153,9 @@ public class SimulationController extends JPanel {
 						if(sensorArray[i]instanceof IntruderSensor){
 							if(sensorArray[i].getstatus()==1)
 							sensorArray[i].setOnSensorAlert();
-							intruderTimer.setRepeats(false); 
+							intruderTimer.setRepeats(true); 
 							intruderTimer.start();    
+                            break;
 						}
 					}
 				}
@@ -127,22 +164,29 @@ public class SimulationController extends JPanel {
 		});
 		
 		// initiate timer
-		fireTimer = new Timer(1000*10, new ActionListener() {
+		fireTimer = new Timer(1000*2, new ActionListener() {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
-		    	 //JOptionPane.setMessage("fire alarm, call phone 1234567");
-		        
-                alarmLogTextArea.append("calling\n");
-		        //JOptionPane.showMessageDialog(fireButton,"call 123-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
-		        bill.incrementNumFireAlarmCalls();
+		        if (!responseCodeEntered) { 
+                    alarmLogTextArea.append("calling\n");
+                    bill.incrementNumFireAlarmCalls();
+                } else {
+                    responseCodeEntered = false;
+                    fireTimer.stop();
+                }
 		      }
 		    });
 		
-		intruderTimer = new Timer(1000*10, new ActionListener() {
+		intruderTimer = new Timer(1000*2, new ActionListener() {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
-		    	  JOptionPane.showMessageDialog(intruderButton,"call 321-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
-		        bill.incrementNumIntruderAlarmCalls();
+		        if (!responseCodeEntered) { 
+                    alarmLogTextArea.append("calling\n");
+                    bill.incrementNumIntruderAlarmCalls();
+                } else {
+                    responseCodeEntered = false;
+                    intruderTimer.stop();
+                }
 		      }
 		    });
 
@@ -198,7 +242,18 @@ public class SimulationController extends JPanel {
 	public void intruderAlertTimer(){
 		
 	}
-	
+    
+    private void setResponseCode() {
+        try {
+            FileInputStream fis = new FileInputStream("ResponseCode.txt");
+            //Construct BufferedReader from InputStreamReader
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            responseCode = br.readLine().trim();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
  }
 
