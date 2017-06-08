@@ -22,7 +22,7 @@ import model.SensorGroup;
 public class SimulationController extends JPanel {
 	private SensorBank sensorbank;
 	private JComboBox groupCombo, positionCombo;
-	private JButton fireButton, intruderButton, turnOffIntruder,turnOffFire;
+	private JButton fireButton, intruderButton, turnOffIntruderButton,turnOffFireButton;
 	private JLabel groupLabel, positionLabel;
 	private Timer fireTimer,intruderTimer;
 	private BillingInfo bill;
@@ -31,6 +31,7 @@ public class SimulationController extends JPanel {
     private JTextArea alarmLogTextArea;
     private boolean responseCodeEntered;
     private String responseCode;
+    private boolean fireAlarmMute,intruderAlarmMute;
 
 
 	public SimulationController(SensorBank sensorbank,BillingInfo bill){
@@ -39,6 +40,8 @@ public class SimulationController extends JPanel {
 		this.bill = bill;
         responseCodeEntered = false;
         setResponseCode();
+        fireAlarmMute = false;
+        intruderAlarmMute = false;
 		groupLabel = new JLabel("Sensor Group ");
 		positionLabel = new JLabel("Sensor Position ");
 		JComboBox cbx1 = groupComboBox();
@@ -51,8 +54,8 @@ public class SimulationController extends JPanel {
 		JPanel panel1 = new JPanel();
 		panel1.add(groupLabel);
 		panel1.add(cbx1);
-		panel1.add(positionLabel);
-		panel1.add(cbx2);
+		//panel1.add(positionLabel);
+		//panel1.add(cbx2);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
@@ -63,6 +66,7 @@ public class SimulationController extends JPanel {
         panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
         JButton responseCodeButton = new JButton("Enter Response Code");
         JTextField responseCodeTextField = new JTextField();
+        
         responseCodeButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
@@ -93,34 +97,84 @@ public class SimulationController extends JPanel {
 		panel4.setLayout(new BorderLayout());
         panel4.add(alarmLogScrollPane);
         
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		//layout.setVgap(3);
-		//this.setLayout(layout);
+        turnOffFireButton= new JButton("OFF Fire Alarm");
+        turnOffIntruderButton = new JButton("OFF indruder Alarm");
+        
+        turnOffFireButton.addActionListener(new ActionListener()
+        		{
+                   public void actionPerformed(ActionEvent event){
+                	   fireAlarmMute =true;
+                	   SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
+       				   Sensor[] sensorArray = sensorbank.getGroup(sg);
+       				   for(int i=0;i<sensorArray.length;i++){
+       					if(sensorbank.checkInstalledOrNot(sg,i)){
+       						if(sensorArray[i]instanceof FireSensor){
+       							if(sensorArray[i].getstatus()==-1){
+       								sensorArray[i].setOffSensorAlert();
+       							}
+       						}
+                         }
+       			      }
+                   }
+        		}
+        	);
+        
+        /*add OffintruderButton
+         * 
+         * 
+         * 
+         * 
+      
+         */
+        turnOffIntruderButton.addActionListener(new ActionListener()
+		{
+           public void actionPerformed(ActionEvent event){
+        	   intruderAlarmMute =true;
+        	   SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
+				   Sensor[] sensorArray = sensorbank.getGroup(sg);
+				   for(int i=0;i<sensorArray.length;i++){
+					if(sensorbank.checkInstalledOrNot(sg,i)){
+						if(sensorArray[i]instanceof IntruderSensor){
+							if(sensorArray[i].getstatus()==-1){
+								sensorArray[i].setOffSensorAlert();
+							}
+						}
+                 }
+			      }
+           }
+		}
+	);
+        
+        
+        
+        JPanel panel5 = new JPanel();
+        
+        
+        
+       
+        panel5.setLayout(new FlowLayout());
+        panel5.add(turnOffFireButton);
+        panel5.add(turnOffIntruderButton);
+        
 		
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));	
 		add(panel1);
 		add(panel2);
         add(panel3);
         add(panel4);
+        add(panel5);
 		
-		/*
-		add(groupLabel);
-		add(cbx1);
-		add(positionLabel);
-		add(cbx2);
-		add(fireButton);
-		add(intruderButton);
-		*/
 		fireService = new ImageIcon("fire service.jpg");
 
 				
 
 		
-		// fireBtton is to turn on the fire sensor in the chosen section, and chosen location ( only if installed and status is on). 
+		// fireBtton turn on the fire sensor in the chosen section, and chosen location ( only if installed and status is on). 
 		
 		fireButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
-				
+				fireAlarmMute=false;
 				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
 				Sensor[] sensorArray = sensorbank.getGroup(sg);
 				for(int i=0;i<sensorArray.length;i++){
@@ -146,6 +200,7 @@ public class SimulationController extends JPanel {
 		intruderButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
+				intruderAlarmMute = false;
 				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
 				Sensor[] sensorArray = sensorbank.getGroup(sg);
 				for(int i=0;i<sensorArray.length;i++){
@@ -167,12 +222,17 @@ public class SimulationController extends JPanel {
 		fireTimer = new Timer(1000*2, new ActionListener() {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
-		        if (!responseCodeEntered) { 
-                    alarmLogTextArea.append("calling\n");
+		        if (!responseCodeEntered&&!fireAlarmMute) { 
+                    alarmLogTextArea.append("fire calling\n");
                     bill.incrementNumFireAlarmCalls();
                 } else {
+                	if(responseCodeEntered){
                     responseCodeEntered = false;
                     fireTimer.stop();
+                	}
+                	if(fireAlarmMute){
+                		fireTimer.stop();
+                	}
                 }
 		      }
 		    });
@@ -180,12 +240,17 @@ public class SimulationController extends JPanel {
 		intruderTimer = new Timer(1000*2, new ActionListener() {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
-		        if (!responseCodeEntered) { 
-                    alarmLogTextArea.append("calling\n");
+		        if (!responseCodeEntered&&!intruderAlarmMute) { 
+                    alarmLogTextArea.append("intruder calling\n");
                     bill.incrementNumIntruderAlarmCalls();
                 } else {
+                	if(responseCodeEntered){
                     responseCodeEntered = false;
                     intruderTimer.stop();
+                	}
+                	if(intruderAlarmMute){
+                		intruderTimer.stop();
+                	}
                 }
 		      }
 		    });
