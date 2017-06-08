@@ -8,7 +8,7 @@ import java.util.Observable;
 
 public class SensorSchedule extends Observable
 {
-	HashMap< SensorGroup, ArrayList<TimeRange >> groupScheduleMap = new HashMap<SensorGroup, ArrayList<TimeRange> >();
+	HashMap< SensorGroup, ArrayList<TimeRange> > groupScheduleMap = new HashMap< SensorGroup, ArrayList<TimeRange> >();
 
 	public SensorSchedule()
 	{
@@ -28,6 +28,7 @@ public class SensorSchedule extends Observable
 	{
 		return groupScheduleMap.get(group);
 	}
+
 	public void insertTimeRange(SensorGroup group, SensorTime startTime, SensorTime endTime)
 	{
 		ArrayList<TimeRange> timeArray = groupScheduleMap.get(group);
@@ -37,6 +38,4 @@ public class SensorSchedule extends Observable
 		notifyObservers();
 
 	}
-
-	
 }
