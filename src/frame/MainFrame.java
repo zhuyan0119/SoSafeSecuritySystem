@@ -43,12 +43,11 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		//LocalDateTime now=new LocalDateTime();
-		
 		SensorBank sensorbank = new SensorBank();
 		SensorSchedule schedule = new SensorSchedule();
         BillingInfo billingInfo = new BillingInfo();
-        
+        sensorbank.addObserver(billingInfo);
+
 		MainFrame frame = new MainFrame(sensorbank,schedule, billingInfo);
 		frame.go();
 		frame.setVisible(true);
