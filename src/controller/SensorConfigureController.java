@@ -139,6 +139,12 @@ public class SensorConfigureController extends JPanel
 		panelbutton.add(scheduleButton);
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		automationController.setAlignmentX(Component.LEFT_ALIGNMENT);
+		groupPanel.setAlignmentX(LEFT_ALIGNMENT);
+		setTimePanel.setAlignmentX(LEFT_ALIGNMENT);
+		panelbutton.setAlignmentX(LEFT_ALIGNMENT);
+		scheduleShowView.setAlignmentX(LEFT_ALIGNMENT);
+		simulationController.setAlignmentX(LEFT_ALIGNMENT);
 		add(automationController);
 		add(groupPanel);
 		add(setTimePanel);
