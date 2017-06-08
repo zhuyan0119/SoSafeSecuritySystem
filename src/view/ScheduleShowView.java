@@ -41,6 +41,10 @@ public class ScheduleShowView extends JPanel implements Observer
 		{
 			SensorGroup sg = SensorGroup.values()[j];
 			ArrayList<TimeRange> timeArray= sensorSchedule.getGroup(sg);
+			for (int k = 0; k < 5; k++)
+			{
+				data[sg.ordinal()][k] = " ";
+			}
 			for(int i = 1; (i < 5) && (i - 1 < timeArray.size()); i++)
 			{
 				data[sg.ordinal()][i] = timeArray.get(i - 1).toString();
@@ -53,6 +57,7 @@ public class ScheduleShowView extends JPanel implements Observer
 	{
 		fillData();
 		updateUI();
+		System.out.println("Danny!");
 	}
 
 	public static void main(String args[])	

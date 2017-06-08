@@ -39,29 +39,35 @@ public class SensorInstallController extends JPanel
 		//setBorder(new TitledBorder("Installation"));
 		//setLayout(null);
 
-		setLayout(new FlowLayout());
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		JPanel instalPane = new JPanel();
+		instalPane.setLayout(new BoxLayout(instalPane,BoxLayout.Y_AXIS));
 		JPanel typePanel = new JPanel();
 		typePanel.add(sensorLabel);
 		typePanel.add(cbx3);
-		add(typePanel);
+		instalPane.add(typePanel);
 
 		//add(sensorLabel);
 		//add(cbx3);
 		JPanel groupPanel = new JPanel();
 		groupPanel.add(groupLabel);
 		groupPanel.add(cbx1);
-		add(groupPanel);
+		instalPane.add(groupPanel);
 
 		//add(groupLabel);
 		//add(cbx1);
 		JPanel positionPanel = new JPanel();
 		positionPanel.add(positionLabel);
 		positionPanel.add(cbx2);
-		add(positionPanel);
+		instalPane.add(positionPanel);
+		instalPane.add(installButton);
 
 		//add(positionLabel);
 		//add(cbx2);
-		add(installButton);
+		//add(installButton);
+		instalPane.setBorder(new TitledBorder("Installation"));
+		add(instalPane);
+		passwordController.setBorder(new TitledBorder("Set Password"));
 		add(passwordController);
 		
 		installButton.addActionListener(new ActionListener()
