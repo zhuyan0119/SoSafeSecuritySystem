@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +26,7 @@ public class SimulationController extends JPanel {
 	private BillingInfo bill;
 	private ImageIcon fireService;	
 	private ImageIcon intruderService;
+    private JTextArea alarmLogTextArea;;
 
 	public SimulationController(SensorBank sensorbank,BillingInfo bill){
 		super();
@@ -49,12 +51,20 @@ public class SimulationController extends JPanel {
 		panel2.add(fireButton);
 		panel2.add(intruderButton);
 		
+        alarmLogTextArea = new JTextArea();
+        alarmLogTextArea.setEditable(false);
+        JScrollPane alarmLogScrollPane = new JScrollPane(alarmLogTextArea);
+		JPanel panel3 = new JPanel ();
+		panel3.setLayout(new BorderLayout());
+        panel3.add(alarmLogScrollPane);
+
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		//layout.setVgap(3);
 		//this.setLayout(layout);
 		
 		add(panel1);
 		add(panel2);
+        add(panel3);
 		
 		/*
 		add(groupLabel);
@@ -64,7 +74,7 @@ public class SimulationController extends JPanel {
 		add(fireButton);
 		add(intruderButton);
 		*/
-		fireService =new ImageIcon("fire service.jpg");
+		fireService = new ImageIcon("fire service.jpg");
 
 				
 
@@ -117,7 +127,8 @@ public class SimulationController extends JPanel {
 		      public void actionPerformed(ActionEvent e) {
 		    	 //JOptionPane.setMessage("fire alarm, call phone 1234567");
 		        
-		        JOptionPane.showMessageDialog(fireButton,"call 123-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
+		        //JOptionPane.showMessageDialog(fireButton,"call 123-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
+                alarmLogTextArea.append("calling\n");
 		        bill.incrementNumFireAlarmCalls();
 		      }
 		    });
