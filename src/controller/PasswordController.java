@@ -48,17 +48,7 @@ public class PasswordController extends JPanel
 					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
 
 				}
-				
-				
-				/*
-				if(!passWord.checkPwSetOrNot()){
-					passWord.setPassWord(passWordLabel.getText());
-					
-				}
-				else{
-					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
-				}
-				*/
+			
 				
 				
 			}
