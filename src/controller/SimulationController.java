@@ -19,7 +19,7 @@ import model.SensorGroup;
 public class SimulationController extends JPanel {
 	private SensorBank sensorbank;
 	private JComboBox groupCombo, positionCombo;
-	private JButton fireButton, intruderButton;
+	private JButton fireButton, intruderButton, turnOffIntruder,turnOffFire;
 	private JLabel groupLabel, positionLabel;
 	private Timer fireTimer,intruderTimer;
 	private BillingInfo bill;
@@ -37,6 +37,7 @@ public class SimulationController extends JPanel {
 		
 		fireButton = new JButton("fire");
 		intruderButton = new JButton("intruder");
+		
 		
 		JPanel panel1 = new JPanel();
 		panel1.add(groupLabel);
@@ -80,9 +81,12 @@ public class SimulationController extends JPanel {
 				for(int i=0;i<sensorArray.length;i++){
 					if(sensorbank.checkInstalledOrNot(sg,i)){
 						if(sensorArray[i]instanceof FireSensor){
-							sensorArray[i].setOnSensorAlert();
-							fireTimer.setRepeats(false);
-							fireTimer.start();	
+							if(sensorArray[i].getstatus()==1){
+								sensorArray[i].setOnSensorAlert();
+								fireTimer.setRepeats(false);
+								fireTimer.start();
+							}
+								
 					}
 				}
 						
@@ -101,6 +105,7 @@ public class SimulationController extends JPanel {
 				for(int i=0;i<sensorArray.length;i++){
 					if(sensorbank.checkInstalledOrNot(sg,i)){
 						if(sensorArray[i]instanceof IntruderSensor){
+							if(sensorArray[i].getstatus()==1)
 							sensorArray[i].setOnSensorAlert();
 							intruderTimer.setRepeats(false); 
 							intruderTimer.start();    
@@ -116,7 +121,6 @@ public class SimulationController extends JPanel {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
 		    	 //JOptionPane.setMessage("fire alarm, call phone 1234567");
-		        
 		        JOptionPane.showMessageDialog(fireButton,"call 123-4567-8910","service",JOptionPane.INFORMATION_MESSAGE);
 		        bill.incrementNumFireAlarmCalls();
 		      }
