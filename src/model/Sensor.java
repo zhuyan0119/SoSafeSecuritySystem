@@ -19,7 +19,7 @@ public abstract class Sensor extends Observable
 
 	public Sensor()
 	{
-		status=0;//default sensor status is off
+		status = 1;//default sensor status is off
 		sensorID = nextID;
 		nextID ++;
 		automation = false;
