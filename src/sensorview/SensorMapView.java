@@ -85,20 +85,20 @@ public class SensorMapView extends JPanel implements Observer {
 		int[] xy = {0,0};
 		// location 1
 		if(i==0){
-			xy[0]=30;
-			xy[1]=30;
+			xy[0]=40;
+			xy[1]=40;
 			return xy;
 		}
 		//location 2	
 		else if(i==1){
-			xy[0]=150;
-			xy[1]=50;
+			xy[0]=160;
+			xy[1]=40;
 			return xy;
 		}
 		//location 3
 		else if(i==2){
-			xy[0]=90;
-			xy[1]=130;
+			xy[0]=100;
+			xy[1]=150;
 			return xy;
 		}
 		return xy;		

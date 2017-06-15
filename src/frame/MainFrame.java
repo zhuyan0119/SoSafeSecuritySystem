@@ -11,8 +11,7 @@ public class MainFrame extends JFrame {
 	private SensorBank sensorBank;
 	private SensorSchedule sensorSchedule;
 	
-	// contains controller
-	//Instrallation installation;
+	// contains password controller
 	PasswordController passwordController;
 	
 	//contains frame and TabbedPanel
@@ -31,6 +30,7 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	// define threads for each section for schedule the sensor
 	public void go(){
 		Scheduler north = new Scheduler(SensorGroup.NORTH,sensorSchedule,sensorBank);
 		new Thread(north).start();

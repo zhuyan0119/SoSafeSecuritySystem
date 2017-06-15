@@ -32,6 +32,7 @@ public class SimulationController extends JPanel {
     private boolean responseCodeEntered;
     private String responseCode;
     private boolean fireAlarmMute,intruderAlarmMute;
+   // private int selectedposition;
 
 
 	public SimulationController(SensorBank sensorbank,BillingInfo bill){
@@ -54,8 +55,8 @@ public class SimulationController extends JPanel {
 		JPanel panel1 = new JPanel();
 		panel1.add(groupLabel);
 		panel1.add(cbx1);
-		//panel1.add(positionLabel);
-		//panel1.add(cbx2);
+		panel1.add(positionLabel);
+		panel1.add(cbx2);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
@@ -92,7 +93,7 @@ public class SimulationController extends JPanel {
 
         alarmLogTextArea = new JTextArea();
         alarmLogTextArea.setEditable(false);
-        JScrollPane alarmLogScrollPane = new JScrollPane(alarmLogTextArea);
+        JScrollPane alarmLogScrollPane = new JScrollPane(alarmLogTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		JPanel panel4 = new JPanel();
 		panel4.setLayout(new BorderLayout());
         panel4.add(alarmLogScrollPane);
@@ -174,14 +175,34 @@ public class SimulationController extends JPanel {
 		fireButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
+				/*
+				fireAlarmMute = false;
+				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
+				Sensor[] sensorArray = sensorbank.getGroup(sg);
+				int selectedposition = getSelectedPosition(positionLabel.getText());
+				if(sensorbank.checkInstalledOrNot(sg,selectedposition)){
+					if(sensorArray[selectedposition]instanceof FireSensor){
+						if(sensorArray[selectedposition].getstatus()==1){
+							System.out.println("turn on alarm at position"+selectedposition);
+						sensorArray[selectedposition].setOnSensorAlert();
+						intruderTimer.setRepeats(true); 
+						intruderTimer.start();
+						}
+					}
+				}
+				
+				*/
+				
+				
 				fireAlarmMute=false;
 				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
 				Sensor[] sensorArray = sensorbank.getGroup(sg);
+				int selectedposition = getSelectedPosition(positionLabel.getText());
 				for(int i=0;i<sensorArray.length;i++){
-					if(sensorbank.checkInstalledOrNot(sg,i)){
-						if(sensorArray[i]instanceof FireSensor){
-							if(sensorArray[i].getstatus()==1){
-								sensorArray[i].setOnSensorAlert();
+					if(sensorbank.checkInstalledOrNot(sg,selectedposition)){
+						if(sensorArray[selectedposition]instanceof FireSensor){
+							if(sensorArray[selectedposition].getstatus()==1){
+								sensorArray[selectedposition].setOnSensorAlert();
 								fireTimer.setRepeats(true);
 								fireTimer.start();
                                 break;
@@ -191,6 +212,7 @@ public class SimulationController extends JPanel {
 				}
 						
 			}
+				
 		}
 	});
 
@@ -200,20 +222,39 @@ public class SimulationController extends JPanel {
 		intruderButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
+				/*
 				intruderAlarmMute = false;
 				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
 				Sensor[] sensorArray = sensorbank.getGroup(sg);
+				int selectedposition = getSelectedPosition(positionLabel.getText());
+				if(sensorbank.checkInstalledOrNot(sg,selectedposition)){
+					if(sensorArray[selectedposition]instanceof IntruderSensor){
+						if(sensorArray[selectedposition].getstatus()==1){
+							System.out.println("turn on alarm at position"+selectedposition);
+						sensorArray[selectedposition].setOnSensorAlert();
+						intruderTimer.setRepeats(true); 
+						intruderTimer.start();
+						}
+					}
+				}*/
+				
+				
+				intruderAlarmMute = false;
+				SensorGroup sg = SensorGroup.valueOf(groupLabel.getText());
+				Sensor[] sensorArray = sensorbank.getGroup(sg);
+				int selectedposition = getSelectedPosition(positionLabel.getText());
 				for(int i=0;i<sensorArray.length;i++){
-					if(sensorbank.checkInstalledOrNot(sg,i)){
-						if(sensorArray[i]instanceof IntruderSensor){
-							if(sensorArray[i].getstatus()==1)
-							sensorArray[i].setOnSensorAlert();
+					if(sensorbank.checkInstalledOrNot(sg,selectedposition)){
+						if(sensorArray[selectedposition]instanceof IntruderSensor){
+							if(sensorArray[selectedposition].getstatus()==1)
+							sensorArray[selectedposition].setOnSensorAlert();
 							intruderTimer.setRepeats(true); 
 							intruderTimer.start();    
                             break;
 						}
 					}
 				}
+			
 						
 			}
 		});
@@ -294,10 +335,25 @@ public class SimulationController extends JPanel {
       			JComboBox cb1= (JComboBox)e.getSource();
       			String type1 = (String)cb1.getSelectedItem();
       			positionLabel.setText(type1);
+      			
       		}
       	});
       	return positionCombo;
 
+	}
+	
+	public int getSelectedPosition(String positionLabel){
+		int selectedposition=0;
+		if(positionLabel.equals("Position1")){
+				selectedposition =0;
+			}
+			if(positionLabel.equals("Position2")){
+				selectedposition = 1;
+			}
+			if(positionLabel.equals("Position3")){
+				selectedposition =2;
+			}
+		return selectedposition;
 	}
 	
 	public void fireAlertTimer(){

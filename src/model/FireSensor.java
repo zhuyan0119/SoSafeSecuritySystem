@@ -1,10 +1,11 @@
 package model;
 
+// fireSensor is a subclass of Sensor
 public class FireSensor extends Sensor{
 	public FireSensor()
  	{
  		super();
- 		//sensorType = type;
+
  	}
 	
 	// return the fire Icon file names
