@@ -7,19 +7,6 @@ public class PassWordData implements Serializable
 	private String passWord;
 	private boolean setOrNot = false;
 
-	public PassWordData()
-	{
-		File pwdFile = new File("password.txt");
-		if (pwdFile.exists()){
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("password.txt"));  
-			PassWordData s = (PassWordData)in.readObject();  
-			System.out.println(s.id+" "+s.name);  
-
-			in.close();  
-			setOrNot = true;
-		}
-	}
-
 	public void setPassWord(String pswd) throws Exception
 	{
 		if(setOrNot == false)
