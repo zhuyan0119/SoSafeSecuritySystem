@@ -30,6 +30,10 @@ public class PasswordController extends JPanel
 		add(passWordTextField);
 		add(passWordButton);
 		
+		if (passWord.checkPwSetOrNot()) {
+			passWordTextField.setText("password setted!" );
+			passWordButton.setVisible(false);
+		}
 
 		passWordButton.addActionListener(new ActionListener()
 		{
@@ -37,7 +41,6 @@ public class PasswordController extends JPanel
 			{
 				try
 				{
-					passWord.checkPwSetOrNot();
 					passWord.setPassWord(passWordTextField.getText());
 					passWordTextField.setText("password setted!" );
 					passWordButton.setVisible(false);
@@ -48,17 +51,7 @@ public class PasswordController extends JPanel
 					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
 
 				}
-				
-				
-				/*
-				if(!passWord.checkPwSetOrNot()){
-					passWord.setPassWord(passWordLabel.getText());
-					
-				}
-				else{
-					JOptionPane.showMessageDialog(PasswordController.this,"Dont't set password again!","Error",JOptionPane.ERROR_MESSAGE);
-				}
-				*/
+			
 				
 				
 			}

@@ -10,6 +10,7 @@ class CustomerInfo {
     private String startDate;
     private String endDate;
 
+    // customerInfo is read from text file
     public CustomerInfo(String filePath) {
         try {
             FileInputStream fis = new FileInputStream(filePath);
@@ -32,6 +33,7 @@ class CustomerInfo {
         }
     }
 
+    // custromerinfo is written a String.
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("- Service Contract ID: " + new Integer(serviceContractId).toString() + "\n");

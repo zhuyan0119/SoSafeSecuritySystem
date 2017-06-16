@@ -7,25 +7,22 @@ public abstract class Sensor extends Observable
 {
 	
 	private static int nextID = 0;
-
 	private int  sensorID;
 	private String sensorType;
-	
+	// automation is true when sensor in on schedule-control mode, if false when sensor is on manual control mode
 	public boolean automation;
-	
 	private int status; // 0 for OFF, 1 for ON ,  -1 for Alert!
-	
-	
 
 	public Sensor()
 	{
-		status = 1;//default sensor status is off
+		status = 1;//default sensor status is on
 		sensorID = nextID;
 		nextID ++;
-		automation = false;
+		automation = false; // default sensor is on maual controle mode
 
 	}
-
+	
+    // several getter the SensorID, SensorType, Automation
 	public int getSensorID()
 	{
 		return sensorID;
@@ -41,6 +38,7 @@ public abstract class Sensor extends Observable
 		return automation;
 	}
 	
+	// several setters for Automation, SensorStatus  set change, notify observer
 	public boolean setAutomation(boolean auto){
 		return this.automation=auto;
 	}
@@ -82,7 +80,7 @@ public abstract class Sensor extends Observable
 		return status;
 	}
 	
-	public void observestatus()
+	/*public void observestatus()
 	{
 		this.status = status;
 
@@ -90,7 +88,7 @@ public abstract class Sensor extends Observable
 	    // notify el has changed
 	    notifyObservers();	
 
-	}
+	}*/
 	
 	
 	/*

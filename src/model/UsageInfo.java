@@ -45,7 +45,7 @@ class UsageInfo
         numFireAlarmCalls += 1;
     }
     
-   
+ 
 
     public String generateBill() {
         StringBuilder bill = new StringBuilder();
@@ -60,13 +60,36 @@ class UsageInfo
             if (numIntruderSensors > 0) {
                 fireInstallCost = new Integer(new Double(FIRE_INSTALL_COST * 0.8).intValue());
             }
-
-            bill.append("\n");
             bill.append("Fire Detection:\n");
             bill.append("- Initial Installion Service Charge: " + fireInstallCost.toString() + "\n");
             bill.append("- Sensor Installion Charge: " + new Integer(numFireSensors * FIRE_SENSOR_COST).toString() + " (" + numFireSensors.toString() + " sensors at " + FIRE_SENSOR_COST.toString() + " per sensor)" + "\n");
             bill.append("- Alarm Cost: " + new Integer(numFireAlarmCalls * FIRE_ALARM_COST).toString() + " (" + numFireAlarmCalls.toString() + " calls at " + FIRE_ALARM_COST.toString() + " per call)" + "\n");
         }
         return bill.toString();
+    }
+    
+    public HashMap<String,Double> getfireBillValue(){
+    	HashMap<String,Double> fireBillValue = new HashMap<String,Double>();
+    	
+    	
+         if (numFireSensors > 0) {
+             double fireInitialCost = (double)FIRE_INSTALL_COST*0.8;
+             double Installation = numFireSensors * FIRE_SENSOR_COST;
+             double alarm = numFireAlarmCalls * FIRE_ALARM_COST;
+             fireBillValue.put("InitialCost", fireInitialCost);
+             fireBillValue.put("Installation", Installation);
+             fireBillValue.put("alarm", alarm);
+             }
+         return fireBillValue;
+    }
+    
+    public HashMap<String,Double> getIntruderBillValue(){
+    	HashMap<String, Double> intruderBillValue = new HashMap<String,Double>();
+    	 if (numIntruderSensors > 0) {
+    		 intruderBillValue.put("InitialCost",INTRUSION_INSTALL_COST.doubleValue());
+    		 intruderBillValue.put("Installation",(double)numIntruderSensors * INTRUSION_SENSOR_COST);
+    		 intruderBillValue.put("alarm", (double)numIntruderAlarmCalls * INTRUSION_ALARM_COST);
+         }
+    	 return intruderBillValue;
     }
 }

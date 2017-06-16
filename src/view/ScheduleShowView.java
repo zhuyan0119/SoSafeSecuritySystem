@@ -57,7 +57,6 @@ public class ScheduleShowView extends JPanel implements Observer
 	{
 		fillData();
 		updateUI();
-		System.out.println("Danny!");
 	}
 
 	public static void main(String args[])	

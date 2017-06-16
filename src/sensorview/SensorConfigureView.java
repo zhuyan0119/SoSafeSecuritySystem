@@ -11,7 +11,7 @@ import model.*;
 
 public class SensorConfigureView extends JPanel implements Observer {
 
-	// use 3 panels to represent the layout of building 
+	// use 4 panels to represent the layout of building 
 	private JPanel north = new JPanel();
 	private JPanel south = new JPanel();
 	private JPanel east = new JPanel();
@@ -34,7 +34,8 @@ public class SensorConfigureView extends JPanel implements Observer {
 		setBorder(new TitledBorder("Building Map"));
 		setLayout(new GridLayout(2,2));
 		showBuildingMap();
-
+		
+		// addObserver to each installed sensor and the SensorBank
 		for (int j = 0; j < SensorGroup.values().length; j++)
 		{
 			SensorGroup sg = SensorGroup.values()[j];
@@ -90,7 +91,7 @@ public class SensorConfigureView extends JPanel implements Observer {
 	public void drawSensor(SensorBank sensorbank)
 	{
 	
-		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors install
+		/* define a temp Sensor[] to store sensor intallation information of N,or E or S or W, each direction has 3 location to install sensors 
 		 and only one sensor, either firesensor or intrudersensor installed at on location */
 		Sensor[] locationSensor = new Sensor[3];
 				
@@ -131,21 +132,21 @@ public class SensorConfigureView extends JPanel implements Observer {
 		int[] xy = {0,0};
 		if(i==0)
 		{
-			xy[0]=30;
-			xy[1]=30;
+			xy[0]=40;
+			xy[1]=40;
 			return xy;
 		}
 			
 		else if(i==1)
 		{
-			xy[0]=150;
-			xy[1]=50;
+			xy[0]=160;
+			xy[1]=40;
 			return xy;
 		}
 		else if(i==2)
 		{
-			xy[0]=90;
-			xy[1]=130;
+			xy[0]=100;
+			xy[1]=150;
 			return xy;
 		}
 		return xy;		

@@ -26,8 +26,11 @@ public class SensorInstallController extends JPanel
 		passwordController = new PasswordController(controlledSensorBank);
 		sensorbank = controlledSensorBank;
 		groupLabel = new JLabel("Sensor Group ");
+
 		positionLabel = new JLabel("Sensor Position ");
+
 		sensorLabel = new JLabel("Sensor Type ");
+
 
 		JComboBox cbx1 = groupComboBox();
 		JComboBox cbx2 = positionComboBox();

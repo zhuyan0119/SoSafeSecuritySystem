@@ -43,6 +43,11 @@ public class LoginController extends JPanel
 					updateUI();
 
 				}	
+				else
+				{
+					JOptionPane.showMessageDialog(LoginController.this,"Please enter correct password!","Error",JOptionPane.ERROR_MESSAGE);
+
+				}
 
 			}
 		});

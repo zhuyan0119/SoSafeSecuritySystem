@@ -1,20 +1,18 @@
 package model;
 
 import java.util.*;
-
-
+import java.io.*;
+	
+// SensorBank record the sensor information on each group: north,south,east and west
 public class SensorBank extends Observable{
 
-	//private Map<String, Sensor> idSensorMap = new HashMap<String, Sensor>();
 	private Map<SensorGroup, Sensor[] > groupSensorMap = new HashMap<SensorGroup, Sensor[]>();
 	private PassWordData pw;
 	public Boolean automation;
-	//private Map<SensorGroup, int[]> firesensorID;
-	//private Map<SensorGroup,int[]> intrudersensorID;
 	
+	//initiate each group
 	public SensorBank()
 	{
-	
 		Sensor[] northGroup = new Sensor[3];
 		Sensor[] southGroup = new Sensor[3];
  		Sensor[] eastGroup = new Sensor[3];
@@ -23,19 +21,26 @@ public class SensorBank extends Observable{
 		groupSensorMap.put(SensorGroup.SOUTH, southGroup);
 		groupSensorMap.put(SensorGroup.EAST, eastGroup);
 		groupSensorMap.put(SensorGroup.WEST, westGroup);
-		pw = new PassWordData();
-		automation = false;
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("password.txt"));  
+			pw = (PassWordData)in.readObject();  
+			in.close();  
+		} catch(Exception e) {
+			pw = new PassWordData();
+		}
+		automation = false; // default automation is off, so all sensor is manually controlled
 	
 	}
 	
+	// get the Sensor Array of one SensorGroup
 	public Sensor[] getGroup(SensorGroup group)
 	{
 		return groupSensorMap.get(group);
 	}
 	
+	// insert sensor to a sensorGroup based on position, notify observer
 	public void insertSensor(Sensor sensor, SensorGroup sensorGroup, int position)
 	{
-		System.out.println("add sensor");
 		Sensor[] sensorArray = groupSensorMap.get(sensorGroup);
 		sensorArray[position] = sensor;
 		setChanged();
@@ -61,6 +66,8 @@ public class SensorBank extends Observable{
 	{
 		automation = auto;
 	}
+	
+	// if Automation of SensorBank change, the Automation of all sensors in SensorBank need to do the same change
 	public void updateSensorAutomation(){
 		SensorGroup[] sg = SensorGroup.values();
 		for(int i=0; i<sg.length;i++){

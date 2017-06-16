@@ -1,11 +1,13 @@
 package model;
 import java.util.*;
 
+// BilingInfo observe UsageInfor.java, and observed by BillView
 public class BillingInfo extends Observable implements Observer 
 {
     private CustomerInfo customerInfo = new CustomerInfo("CustomerInfo.txt");
     private UsageInfo usageInfo = new UsageInfo();
     
+    // intruderAlarmCall increases
     public void incrementNumIntruderAlarmCalls() {
         usageInfo.incrementNumIntruderAlarmCalls();
 		setChanged();
@@ -13,6 +15,7 @@ public class BillingInfo extends Observable implements Observer
 	    notifyObservers();	
     }
 
+    // fireAlarmCall increases
     public void incrementNumFireAlarmCalls() {
         usageInfo.incrementNumFireAlarmCalls();
 		setChanged();
@@ -20,12 +23,15 @@ public class BillingInfo extends Observable implements Observer
 	    notifyObservers();	
     }
 
+    // generate and return bill in as String.
     public String generateBill() {
         StringBuilder bill = new StringBuilder();
         bill.append("Customer Information:\n");
         bill.append(customerInfo.toString());
         bill.append("\n");
         bill.append(usageInfo.generateBill());
+        bill.append("\n");
+
         return bill.toString();
     }
 

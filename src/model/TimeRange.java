@@ -2,6 +2,7 @@ package model;
 
 import java.util.*;
 
+// TimeRange class to store startTime and endTime information of schedule
 public class TimeRange
 {
 	public SensorTime startTime;

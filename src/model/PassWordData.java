@@ -1,33 +1,44 @@
 package model;
 
-public class PassWordData
+import java.io.*;
+
+public class PassWordData implements Serializable
 {
 	private String passWord;
 	private boolean setOrNot = false;
 
-	
+	public PassWordData()
+	{
+		File pwdFile = new File("password.txt");
+		if (pwdFile.exists()){
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("password.txt"));  
+			PassWordData s = (PassWordData)in.readObject();  
+			System.out.println(s.id+" "+s.name);  
+
+			in.close();  
+			setOrNot = true;
+		}
+	}
+
 	public void setPassWord(String pswd) throws Exception
 	{
 		if(setOrNot == false)
 		{
 			passWord = pswd;
 			setOrNot = true;
+			FileOutputStream fout = new FileOutputStream("password.txt");  
+			ObjectOutputStream out = new ObjectOutputStream(fout);  
+
+			out.writeObject(this);  
+			out.flush();  
+			fout.close();
 		}
 		else
-			{
-				throw new Exception("Dont't set password again!");
-			} 
+		{
+			throw new Exception("Dont't set password again!");
+		} 
 	}
 	
-	/*
-	public void setPassWord(String pswd){
-		if(setOrNot == false)
-		{
-			passWord = pswd;
-			setOrNot = true;
-		}
-	}
-	*/
 	
 	// return false means not set password, true means already set password
 	public boolean checkPwSetOrNot()
@@ -36,10 +47,10 @@ public class PassWordData
 	}
 	public boolean checkPassWord(String newPswd)
 	{
-		System.out.println("DEBUG0");
-		System.out.println(passWord);
-		System.out.println(newPswd);
-		System.out.println(newPswd.equals(passWord));
+		//System.out.println("DEBUG0");
+		//System.out.println(passWord);
+		//System.out.println(newPswd);
+		//System.out.println(newPswd.equals(passWord));
 		return newPswd.equals(passWord);
 	}
 
