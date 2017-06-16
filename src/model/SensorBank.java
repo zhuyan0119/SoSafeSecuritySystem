@@ -1,7 +1,8 @@
 package model;
 
 import java.util.*;
-
+import java.io.*;
+	
 // SensorBank record the sensor information on each group: north,south,east and west
 public class SensorBank extends Observable{
 
@@ -20,7 +21,13 @@ public class SensorBank extends Observable{
 		groupSensorMap.put(SensorGroup.SOUTH, southGroup);
 		groupSensorMap.put(SensorGroup.EAST, eastGroup);
 		groupSensorMap.put(SensorGroup.WEST, westGroup);
-		pw = new PassWordData();
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("password.txt"));  
+			pw = (PassWordData)in.readObject();  
+			in.close();  
+		} catch(Exception e) {
+			pw = new PassWordData();
+		}
 		automation = false; // default automation is off, so all sensor is manually controlled
 	
 	}

@@ -30,6 +30,10 @@ public class PasswordController extends JPanel
 		add(passWordTextField);
 		add(passWordButton);
 		
+		if (passWord.checkPwSetOrNot()) {
+			passWordTextField.setText("password setted!" );
+			passWordButton.setVisible(false);
+		}
 
 		passWordButton.addActionListener(new ActionListener()
 		{
@@ -37,7 +41,6 @@ public class PasswordController extends JPanel
 			{
 				try
 				{
-					passWord.checkPwSetOrNot();
 					passWord.setPassWord(passWordTextField.getText());
 					passWordTextField.setText("password setted!" );
 					passWordButton.setVisible(false);
